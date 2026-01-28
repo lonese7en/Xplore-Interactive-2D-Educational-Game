@@ -1,31 +1,412 @@
+
+const fontStyle = document.createElement('style');
+fontStyle.innerHTML = `
+    @font-face {
+        font-family: 'Ithaca';
+        src: url('assets/Ithaca-LVB75.ttf');
+    }
+`;
+document.head.appendChild(fontStyle);
+
 // --- 1. THE QUESTIONS (LEVEL DATA) ---
 const levels = [
     { 
         level: 1,
-        question: "Find the derivative of: 9x^2", 
-        answer: 18, 
-        options: [18, 9, 81], 
-        playerStart: { x: 400, y: 500 }
+        question: "Find the derivative of: y = 5", 
+        answer: 0, 
+        options: [0, 5, 1], 
+        playerStart: { x: 400, y: 500 },
+        blockStart: { x: 200, y: 250 },
+        blockPositions: [
+            { x: 200, y: 250 },
+            { x: 400, y: 250 },
+            { x: 600, y: 250 }
+        ],
+        answerZone: { x: 700, y: 450 },
+        portalPos: { x: 700, y: 300 }
     },
     { 
         level: 2,
         question: "Solve: 5x + 10 = 35", 
         answer: 5, 
         options: [5, 25, 10],
-        playerStart: { x: 100, y: 100 }
+        playerStart: { x: 100, y: 100 },
+        blockStart: { x: 300, y: 200 },
+        blockPositions: [
+            { x: 300, y: 200 },
+            { x: 300, y: 350 },
+            { x: 300, y: 500 }
+        ],
+        answerZone: { x: 600, y: 300 },
+        portalPos: { x: 500, y: 200 }
     },
     { 
         level: 3,
         question: "What is 12 * 12?", 
         answer: 144, 
         options: [144, 124, 24],
-        playerStart: { x: 400, y: 300 }
+        playerStart: { x: 400, y: 300 },
+        blockStart: { x: 250, y: 100 },
+        blockPositions: [
+            { x: 250, y: 100 },
+            { x: 250, y: 250 },
+            { x: 250, y: 400 }
+        ],
+        answerZone: { x: 700, y: 400 },
+        portalPos: { x: 700, y: 400 }
+    },
+    { 
+        level: 4,
+        question: "Find the derivative of: y = x^2", 
+        answer: '2x', 
+        options: ['x', '2x', 2],
+        playerStart: { x: 400, y: 500 },
+        blockStart: { x: 200, y: 250 },
+        blockPositions: [
+            { x: 200, y: 250 },
+            { x: 900, y: 100 },
+            { x: 200, y: 550 }
+        ],
+        answerZone: { x: 700, y: 450 },
+        portalPos: { x: 700, y: 300 }
+    },
+    { 
+        level: 5,
+        question: "Question for Level 5", 
+        answer: 0, 
+        options: [0, 1, 2],
+        playerStart: { x: 620, y: 1620 },
+        blockStart: { x: 200, y: 250 },
+        gatePos: { x: 625, y: 500 },
+        blockPositions: [
+            { x: 670, y: 1030 },
+            { x: 115, y: 790 },
+            { x: 1150, y: 890 }
+        ],
+        answerZone: { x: 940, y: 660 },
+        portalPos: { x: 621, y: 286 }
+    },
+    { 
+        level: 6,
+        question: "Question for Level 6", 
+        answer: 0, 
+        options: [0, 1, 2],
+        playerStart: { x: 400, y: 500 },
+        blockStart: { x: 200, y: 250 },
+        blockPositions: [
+            { x: 200, y: 250 },
+            { x: 200, y: 400 },
+            { x: 200, y: 550 }
+        ],
+        answerZone: { x: 940, y: 660 },
+        portalPos: { x: 700, y: 300 }
+    },
+    { 
+        level: 7,
+        question: "Question for Level 7", 
+        answer: 0, 
+        options: [0, 1, 2],
+        playerStart: { x: 400, y: 500 },
+        blockStart: { x: 200, y: 250 },
+        blockPositions: [
+            { x: 200, y: 250 },
+            { x: 200, y: 400 },
+            { x: 200, y: 550 }
+        ],
+        answerZone: { x: 700, y: 450 },
+        portalPos: { x: 700, y: 300 }
+    },
+    { 
+        level: 8,
+        question: "Question for Level 8", 
+        answer: 0, 
+        options: [0, 1, 2],
+        playerStart: { x: 400, y: 500 },
+        blockStart: { x: 200, y: 250 },
+        blockPositions: [
+            { x: 200, y: 250 },
+            { x: 200, y: 400 },
+            { x: 200, y: 550 }
+        ],
+        answerZone: { x: 700, y: 450 },
+        portalPos: { x: 700, y: 300 }
+    },
+    { 
+        level: 9,
+        question: "Question for Level 9", 
+        answer: 0, 
+        options: [0, 1, 2],
+        playerStart: { x: 400, y: 500 },
+        blockStart: { x: 200, y: 250 },
+        blockPositions: [
+            { x: 200, y: 250 },
+            { x: 200, y: 400 },
+            { x: 200, y: 550 }
+        ],
+        answerZone: { x: 700, y: 450 },
+        portalPos: { x: 700, y: 300 }
+    },
+    { 
+        level: 10,
+        question: "Question for Level 10", 
+        answer: 0, 
+        options: [0, 1, 2],
+        playerStart: { x: 400, y: 500 },
+        blockStart: { x: 200, y: 250 },
+        blockPositions: [
+            { x: 200, y: 250 },
+            { x: 200, y: 400 },
+            { x: 200, y: 550 }
+        ],
+        answerZone: { x: 700, y: 450 },
+        portalPos: { x: 700, y: 300 }
+    },
+    { 
+        level: 11,
+        question: "Question for Level 11", 
+        answer: 0, 
+        options: [0, 1, 2],
+        playerStart: { x: 400, y: 500 },
+        blockStart: { x: 200, y: 250 },
+        blockPositions: [
+            { x: 200, y: 250 },
+            { x: 200, y: 400 },
+            { x: 200, y: 550 }
+        ],
+        answerZone: { x: 700, y: 450 },
+        portalPos: { x: 700, y: 300 }
+    },
+    { 
+        level: 12,
+        question: "Question for Level 12", 
+        answer: 0, 
+        options: [0, 1, 2],
+        playerStart: { x: 400, y: 500 },
+        blockStart: { x: 200, y: 250 },
+        blockPositions: [
+            { x: 200, y: 250 },
+            { x: 200, y: 400 },
+            { x: 200, y: 550 }
+        ],
+        answerZone: { x: 700, y: 450 },
+        portalPos: { x: 700, y: 300 }
+    },
+    { 
+        level: 13,
+        question: "Question for Level 13", 
+        answer: 0, 
+        options: [0, 1, 2],
+        playerStart: { x: 400, y: 500 },
+        blockStart: { x: 200, y: 250 },
+        blockPositions: [
+            { x: 200, y: 250 },
+            { x: 200, y: 400 },
+            { x: 200, y: 550 }
+        ],
+        answerZone: { x: 700, y: 450 },
+        portalPos: { x: 700, y: 300 }
+    },
+    { 
+        level: 14,
+        question: "Question for Level 14", 
+        answer: 0, 
+        options: [0, 1, 2],
+        playerStart: { x: 400, y: 500 },
+        blockStart: { x: 200, y: 250 },
+        blockPositions: [
+            { x: 200, y: 250 },
+            { x: 200, y: 400 },
+            { x: 200, y: 550 }
+        ],
+        answerZone: { x: 700, y: 450 },
+        portalPos: { x: 700, y: 300 }
+    },
+    { 
+        level: 15,
+        question: "Question for Level 15", 
+        answer: 0, 
+        options: [0, 1, 2],
+        playerStart: { x: 400, y: 500 },
+        blockStart: { x: 200, y: 250 },
+        blockPositions: [
+            { x: 200, y: 250 },
+            { x: 200, y: 400 },
+            { x: 200, y: 550 }
+        ],
+        answerZone: { x: 700, y: 450 },
+        portalPos: { x: 700, y: 300 }
+    },
+    { 
+        level: 16,
+        question: "Question for Level 16", 
+        answer: 0, 
+        options: [0, 1, 2],
+        playerStart: { x: 400, y: 500 },
+        blockStart: { x: 200, y: 250 },
+        blockPositions: [
+            { x: 200, y: 250 },
+            { x: 200, y: 400 },
+            { x: 200, y: 550 }
+        ],
+        answerZone: { x: 700, y: 450 },
+        portalPos: { x: 700, y: 300 }
+    },
+    { 
+        level: 17,
+        question: "Question for Level 17", 
+        answer: 0, 
+        options: [0, 1, 2],
+        playerStart: { x: 400, y: 500 },
+        blockStart: { x: 200, y: 250 },
+        blockPositions: [
+            { x: 200, y: 250 },
+            { x: 200, y: 400 },
+            { x: 200, y: 550 }
+        ],
+        answerZone: { x: 700, y: 450 },
+        portalPos: { x: 700, y: 300 }
+    },
+    { 
+        level: 18,
+        question: "Question for Level 18", 
+        answer: 0, 
+        options: [0, 1, 2],
+        playerStart: { x: 400, y: 500 },
+        blockStart: { x: 200, y: 250 },
+        blockPositions: [
+            { x: 200, y: 250 },
+            { x: 200, y: 400 },
+            { x: 200, y: 550 }
+        ],
+        answerZone: { x: 700, y: 450 },
+        portalPos: { x: 700, y: 300 }
+    },
+    { 
+        level: 19,
+        question: "Question for Level 19", 
+        answer: 0, 
+        options: [0, 1, 2],
+        playerStart: { x: 400, y: 500 },
+        blockStart: { x: 200, y: 250 },
+        blockPositions: [
+            { x: 200, y: 250 },
+            { x: 200, y: 400 },
+            { x: 200, y: 550 }
+        ],
+        answerZone: { x: 700, y: 450 },
+        portalPos: { x: 700, y: 300 }
+    },
+    { 
+        level: 20,
+        question: "Question for Level 20", 
+        answer: 0, 
+        options: [0, 1, 2],
+        playerStart: { x: 400, y: 500 },
+        blockStart: { x: 200, y: 250 },
+        blockPositions: [
+            { x: 200, y: 250 },
+            { x: 200, y: 400 },
+            { x: 200, y: 550 }
+        ],
+        answerZone: { x: 700, y: 450 },
+        portalPos: { x: 700, y: 300 }
+    },
+    { 
+        level: 21,
+        question: "Question for Level 21", 
+        answer: 0, 
+        options: [0, 1, 2],
+        playerStart: { x: 400, y: 500 },
+        blockStart: { x: 200, y: 250 },
+        blockPositions: [
+            { x: 200, y: 250 },
+            { x: 200, y: 400 },
+            { x: 200, y: 550 }
+        ],
+        answerZone: { x: 700, y: 450 },
+        portalPos: { x: 700, y: 300 }
+    },
+    { 
+        level: 22,
+        question: "Question for Level 22", 
+        answer: 0, 
+        options: [0, 1, 2],
+        playerStart: { x: 400, y: 500 },
+        blockStart: { x: 200, y: 250 },
+        blockPositions: [
+            { x: 200, y: 250 },
+            { x: 200, y: 400 },
+            { x: 200, y: 550 }
+        ],
+        answerZone: { x: 700, y: 450 },
+        portalPos: { x: 700, y: 300 }
+    },
+    { 
+        level: 23,
+        question: "Question for Level 23", 
+        answer: 0, 
+        options: [0, 1, 2],
+        playerStart: { x: 400, y: 500 },
+        blockStart: { x: 200, y: 250 },
+        blockPositions: [
+            { x: 200, y: 250 },
+            { x: 200, y: 400 },
+            { x: 200, y: 550 }
+        ],
+        answerZone: { x: 700, y: 450 },
+        portalPos: { x: 700, y: 300 }
+    },
+    { 
+        level: 24,
+        question: "Question for Level 24", 
+        answer: 0, 
+        options: [0, 1, 2],
+        playerStart: { x: 400, y: 500 },
+        blockStart: { x: 200, y: 250 },
+        blockPositions: [
+            { x: 200, y: 250 },
+            { x: 200, y: 400 },
+            { x: 200, y: 550 }
+        ],
+        answerZone: { x: 700, y: 450 },
+        portalPos: { x: 700, y: 300 }
+    },
+    { 
+        level: 25,
+        question: "Question for Level 25", 
+        answer: 0, 
+        options: [0, 1, 2],
+        playerStart: { x: 400, y: 500 },
+        blockStart: { x: 200, y: 250 },
+        blockPositions: [
+            { x: 200, y: 250 },
+            { x: 200, y: 400 },
+            { x: 200, y: 550 }
+        ],
+        answerZone: { x: 700, y: 450 },
+        portalPos: { x: 700, y: 300 }
+    },
+    { 
+        level: 26,
+        question: "Question for Level 26", 
+        answer: 0, 
+        options: [0, 1, 2],
+        playerStart: { x: 400, y: 500 },
+        blockStart: { x: 200, y: 250 },
+        blockPositions: [
+            { x: 200, y: 250 },
+            { x: 200, y: 400 },
+            { x: 200, y: 550 }
+        ],
+        answerZone: { x: 700, y: 450 },
+        portalPos: { x: 700, y: 300 }
     }
 ];
 
 // --- 2. MAIN MENU SCENE ---
 class MainMenu extends Phaser.Scene {
     constructor() { super('MainMenu'); }
+    
 
     preload() {
         // Load the Title Screen Music
@@ -38,33 +419,37 @@ class MainMenu extends Phaser.Scene {
     }
 
     create() {
-        this.add.text(400, 200, 'MATH PUZZLE QUEST', { fontSize: '40px', fill: '#fff' }).setOrigin(0.5);
+        
+        this.add.text(400, 200, 'MATH PUZZLE QUEST', { fontSize: '40px', fill: '#fff', fontFamily: 'Ithaca' }).setOrigin(0.5);
         
         this.sound.stopAll();
         this.bgm = this.sound.add('title_music', { loop: true, volume: 0.5 });
         this.bgm.play();
 
-        let startBtn = this.add.text(400, 300, 'CLICK TO START', { fontSize: '24px', fill: '#0f0' })
+        let startBtn = this.add.text(400, 300, 'CLICK TO START', { fontSize: '24px', fill: '#0f0', fontFamily: 'Ithaca' })
             .setOrigin(0.5)
             .setInteractive({ useHandCursor: true });
 
-       startBtn.on('pointerdown', () => {
-            // OPTIONAL: Play a "Start Game" sound effect here if you have one
-            
-            // Note: We don't strictly NEED to stop the music here because
-            // the GameLevel will run 'stopAll()' immediately, but it's good practice.
+        startBtn.on('pointerdown', () => {
             this.bgm.stop(); 
             
-            this.scene.start('GameLevel', levels[0]); 
+            // Check if there's a saved level. If none, default to 1.
+            const savedLevelNum = parseInt(localStorage.getItem('lastPlayedLevel')) || 1;
+            const levelToLoad = levels.find(l => l.level === savedLevelNum) || levels[0];
+            
+            console.log("Loading Level: " + savedLevelNum);
+            this.scene.start('GameLevel', levelToLoad); 
         });
+
+
         
     }
-    
 }
 
 // --- 3. GAME LEVEL SCENE ---
 class GameLevel extends Phaser.Scene {
     constructor() { super('GameLevel'); }
+    
 
     init(data) {
         this.currentLevelData = data;
@@ -73,24 +458,70 @@ class GameLevel extends Phaser.Scene {
     }
 
     preload() {
- 
+        this.load.spritesheet('floor_items', 'assets/atlas_floor-16x16.png', { 
+            frameWidth: 16, 
+            frameHeight: 16 
+        });
+        this.load.spritesheet('portal', 'assets/Dimensional_Portal.png', { 
+        frameWidth: 32, 
+        frameHeight: 32 
+        });
+
+        this.load.image('gate_locked', 'assets/gate_locked.png');
+        this.load.image('gate_open', 'assets/gate_open.png');
+        this.load.image('dialog_bg', 'assets/dialog_box.png');
         this.load.tilemapTiledJSON('level1', 'assets/level1.json');
+        this.load.tilemapTiledJSON('level2', 'assets/level2.json');
+        this.load.tilemapTiledJSON('level3', 'assets/level3.json');
+        this.load.tilemapTiledJSON('level4', 'assets/level4.json');
+        this.load.tilemapTiledJSON('level5', 'assets/level5.json');
+        // this.load.tilemapTiledJSON('level6', 'assets/level6.json');
+        // this.load.tilemapTiledJSON('level7', 'assets/level7.json');
+        // this.load.tilemapTiledJSON('level8', 'assets/level8.json');
+        // this.load.tilemapTiledJSON('level9', 'assets/level9.json');
+        // this.load.tilemapTiledJSON('level10', 'assets/level10.json');
+        // this.load.tilemapTiledJSON('level11', 'assets/level11.json');
+        // this.load.tilemapTiledJSON('level12', 'assets/level12.json');
+        // this.load.tilemapTiledJSON('level13', 'assets/level13.json');
+        // this.load.tilemapTiledJSON('level14', 'assets/level14.json');
+        // this.load.tilemapTiledJSON('level15', 'assets/level15.json');
+        // this.load.tilemapTiledJSON('level16', 'assets/level16.json');
+        // this.load.tilemapTiledJSON('level17', 'assets/level17.json');
+        // this.load.tilemapTiledJSON('level18', 'assets/level18.json');
+        // this.load.tilemapTiledJSON('level19', 'assets/level19.json');
+        // this.load.tilemapTiledJSON('level20', 'assets/level20.json');
+        // this.load.tilemapTiledJSON('level21', 'assets/level21.json');
+        // this.load.tilemapTiledJSON('level22', 'assets/level22.json');
+        // this.load.tilemapTiledJSON('level23', 'assets/level23.json');
+        // this.load.tilemapTiledJSON('level24', 'assets/level24.json');
+        // this.load.tilemapTiledJSON('level25', 'assets/level25.json');
+        // this.load.tilemapTiledJSON('level26', 'assets/level26.json');
         this.load.image('sunny_tiles_png', 'assets/spr_tileset_sunnysideworld_16px.png');
         this.load.spritesheet('hero_sheet', 'assets/player.png', { 
             frameWidth: 48, 
             frameHeight: 48
         });
 
-        this.load.image('block', 'assets/block.png');
+        this.load.image('block', 'assets/gem.png');
         this.load.image('wall', 'assets/wall.png');
 
         this.load.spritesheet('professor', 'assets/doctor.png', { frameWidth: 16, frameHeight: 32 });
     }
 
     create() {
+        
 
-        const map = this.make.tilemap({ key: 'level1' });
+        localStorage.setItem('lastPlayedLevel', this.currentLevelData.level);
+        this.keyN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.N);
+
+        // FADE IN from black at level start
+        this.cameras.main.fadeFrom(500, 0, 0, 0, false);
+
+        // Load the correct level map based on current level
+        const mapKey = `level${this.currentLevelData.level}`;
+        const map = this.make.tilemap({ key: mapKey });
         const sunnyTiles = map.addTilesetImage('sunny_world', 'sunny_tiles_png', 16, 16, 1, 2);
+        const bridgesLayer = map.createLayer('Bridge', sunnyTiles, 0, 0);
         const groundLayer = map.createLayer('Ground', sunnyTiles, 0, 0);
         const decorLayer = map.createLayer('Decoration', sunnyTiles, 0, 0);
         const wallsLayer = map.createLayer('Walls', sunnyTiles, 0, 0);
@@ -99,42 +530,79 @@ class GameLevel extends Phaser.Scene {
         wallsLayer.setScale(3);
         wallsLayer.setCollisionByExclusion([-1]);
 
+        // --- DEBUG TILE INSPECTOR (Press D to toggle) ---
+        this.debugMode = false;
+        this.debugText = this.add.text(10, 100, '', {
+            fontSize: '14px',
+            fontFamily: 'Courier',
+            fill: '#00ff00',
+            backgroundColor: '#000000',
+            padding: { x: 10, y: 10 }
+        }).setScrollFactor(0).setDepth(1000).setVisible(false);
+
+        this.input.keyboard.on('keydown-D', () => {
+            this.debugMode = !this.debugMode;
+            this.debugText.setVisible(this.debugMode);
+        });
+
+        // Update debug text on pointer move
+        this.input.on('pointermove', (pointer) => {
+            if (this.debugMode) {
+                const worldX = pointer.worldX;
+                const worldY = pointer.worldY;
+                const tileX = Math.floor(worldX / (16 * 3));
+                const tileY = Math.floor(worldY / (16 * 3));
+                
+                this.debugText.setText(
+                    `World: (${Math.round(worldX)}, ${Math.round(worldY)})\n` +
+                    `Tile: (${tileX}, ${tileY})\n\n` +
+                    `{ x: ${Math.round(worldX)}, y: ${Math.round(worldY)} }`
+                );
+            }
+        });
+
+        if (bridgesLayer) {
+    bridgesLayer.setScale(3);
+    // Depth 5 ensures it is above ground but potentially below trees/walls
+    bridgesLayer.setDepth(5); 
+}
+
+        this.dialogContainer = this.add.container(400, 50);
+        this.dialogContainer.setScrollFactor(0); 
+        this.dialogContainer.setDepth(200);
+        this.dialogContainer.setVisible(false);
+        const bubble = this.add.nineslice(0, 0, 'dialog_bg', 0, 700, 150, 10, 10, 10, 10);
+        this.dialogContainer.add(bubble);
+
+        this.dialogText = this.add.text(0, 0, '', {
+            fontSize: '20px',
+            fontFamily: 'Ithaca',
+            color: '#4a3d2e',
+            wordWrap: { width: 650 },
+            align: 'center'
+        }).setOrigin(0.5);
+        this.dialogContainer.add(this.dialogText);
+
         this.keyE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E);
 
-        this.interactPrompt = this.add.text(0, 0, 'Press E', {
-        fontSize: '12px',
-        backgroundColor: '#000000',
-        padding: { x: 5, y: 5 }
-    }).setOrigin(0.5).setDepth(101).setVisible(false);
+        this.interactPrompt = this.add.text(0, 0, 'Press E to talk', {
+            fontSize: '12px',
+            fontFamily: 'Ithaca',
+            backgroundColor: '#000000',
+            padding: { x: 5, y: 5 }
+        }).setOrigin(0.5).setDepth(101).setVisible(false);
 
-
-    // 2. The Main Dialog Bubble (Top of Screen)
-    // We make a container or just a text box with a background
-    this.dialogBox = this.add.text(400, 50, '', {
-        fontSize: '18px',
-        color: '#ffffff',
-        backgroundColor: '#222222', // Dark Grey background
-        padding: { x: 20, y: 20 },
-        wordWrap: { width: 700 },
-        align: 'left',
-        fixedWidth: 700,  // Make it wide
-        fixedHeight: 150  // Make it tall
-    }).setOrigin(0.5, 0) // Anchor at Top-Center
-      .setScrollFactor(0) // Stick to camera (HUD)
-      .setDepth(200)      // Render on top of everything
-      .setVisible(false); // Hide at start
-      
-    // Add a fancy border to the dialog (Optional)
-    this.dialogBox.setStroke('#ffffff', 2);
-
-    this.storyText = this.add.text(400, 450, '', {
+        this.storyText = this.add.text(400, 450, '', {
             fontSize: '18px',
+            fontFamily: 'Ithaca',
             fill: '#ffffff',
             backgroundColor: '#000000',
             padding: { x: 20, y: 20 },
             align: 'center',
             wordWrap: { width: 600 }
         }).setOrigin(0.5).setScrollFactor(0).setDepth(100).setVisible(false);
+
+        
 
 
         
@@ -155,8 +623,7 @@ class GameLevel extends Phaser.Scene {
             frameRate: 10,
             repeat: -1
         });
-
-        // 3. Run Side (Row 5: Frames 24-29)
+        // 3. Run Side
         this.anims.create({
             key: 'run-side',
             frames: this.anims.generateFrameNumbers('hero_sheet', { start: 24, end: 29 }),
@@ -164,7 +631,7 @@ class GameLevel extends Phaser.Scene {
             repeat: -1
         });
 
-        // 4. Run Up (Row 6: Frames 30-35)
+        // 4. Run Up
         this.anims.create({
             key: 'run-up',
             frames: this.anims.generateFrameNumbers('hero_sheet', { start: 30, end: 35 }),
@@ -173,16 +640,34 @@ class GameLevel extends Phaser.Scene {
         });
 
         // --- LEVEL UI ---
-        this.add.text(16, 16, `Level ${this.currentLevelData.level}: ${this.currentLevelData.question}`, { fontSize: '24px', fill: '#fff' });
-
-        // --- TARGET ZONE ---
-        this.targetZone = this.add.zone(700, 300, 10, 10);
-        this.physics.add.existing(this.targetZone, true); 
+        const questionContainer = this.add.container(10, 10);
+        questionContainer.setScrollFactor(0);
+        questionContainer.setDepth(100);
         
-        let zoneGraphics = this.add.graphics();
-        zoneGraphics.lineStyle(2, 0xffff00);
-        zoneGraphics.strokeRect(this.targetZone.x - 30, this.targetZone.y - 30, 60, 60);
-        this.add.text(665, 340, "ANSWER\n  ZONE", { fontSize: '12px', align: 'center' });
+        const questionBubble = this.add.nineslice(260, 20, 'dialog_bg', 0, 500, 60, 10, 10, 10, 10);
+        questionContainer.add(questionBubble);
+        
+        const questionText = this.add.text(260, 20, `Level ${this.currentLevelData.level}: ${this.currentLevelData.question}`, { 
+            fontSize: '18px',
+            fontFamily: 'Ithaca',
+            fill: '#4a3d2e',
+            wordWrap: { width: 480 },
+            align: 'center'
+        }).setOrigin(0.5);
+        questionContainer.add(questionText);
+
+        // --- PRESSURE PLATE (Answer Zone) ---
+        const answerPos = this.currentLevelData.answerZone;
+        this.pressurePlate = this.physics.add.sprite(answerPos.x, answerPos.y, 'floor_items');
+        this.pressurePlate.setScale(3); 
+        this.pressurePlate.setFrame(30); 
+        this.pressurePlate.setImmovable(true);
+        this.pressurePlate.body.setAllowGravity(false);
+        this.pressurePlate.body.setSize(10, 10);
+        this.pressurePlate.body.setOffset(3, 3);
+
+        // 5. Assign it as the targetZone so the rest of your code finds it
+        this.targetZone = this.pressurePlate;
 
         // --- PLAYER SETUP ---
         this.player = this.physics.add.sprite(this.currentLevelData.playerStart.x, this.currentLevelData.playerStart.y, 'hero_sheet');
@@ -212,21 +697,53 @@ class GameLevel extends Phaser.Scene {
 
         
     }
+    if (this.currentLevelData.gatePos) {
+    const pos = this.currentLevelData.gatePos;
+    
+    // Create the gate as a static body
+    this.gate = this.physics.add.staticImage(pos.x, pos.y, 'gate_locked');
+    this.gate.setScale(3);
+    this.gate.setDepth(10);
+    
+    // Safety check: only add collider if gate was successfully created
+    this.physics.add.collider(this.player, this.gate);
+}
+
+// --- STEP 3: WRAP THE CLIFF LOGIC ---
+// To stop the error for good, wrap your cliff overlap in this check:
+if (this.cliffEdges && this.cliffEdges.getLength() > 0) {
+    this.physics.add.overlap(this.blocks, this.cliffEdges, (block, edge) => {
+        if (edge.landX !== undefined) {
+            this.handleBlockDrop(block, edge.landX, edge.landY);
+        }
+    }, null, this);
+}
 
 
         // --- BLOCKS SETUP ---
         this.blocks = this.physics.add.group();
 
-        let yPos = 150;
-        this.currentLevelData.options.forEach(number => {
-            let block = this.blocks.create(200, yPos, 'block');
+        let xPos = this.currentLevelData.blockStart.x;
+        let yPos = this.currentLevelData.blockStart.y;
+        this.currentLevelData.options.forEach((number, index) => {
+            // Use blockPositions if available, otherwise fall back to old stacking behavior
+            let blockPos;
+            if (this.currentLevelData.blockPositions && this.currentLevelData.blockPositions[index]) {
+                blockPos = this.currentLevelData.blockPositions[index];
+            } else {
+                blockPos = { x: xPos, y: yPos + (index * 150) };
+            }
+            
+            let block = this.blocks.create(blockPos.x, blockPos.y, 'block');
             block.setScale(3); // Make blocks big too!
             block.setDrag(1000); 
             block.setBounce(0);
             block.setCollideWorldBounds(true);
             block.value = number; 
             
-            let text = this.add.text(0, 0, number, { fontSize: '16px', color: '#000', fontStyle: 'bold' }).setOrigin(0.5);
+            let text = this.add.text(0, 0, number, { fontSize: '24px', color: '#000', fontFamily: 'Ithaca', fontStyle: 'bold' }).setOrigin(0.5);
+            
+            block.myText = text;  // Store the text inside the block!
             
             block.updateText = function() {
                 text.x = this.x;
@@ -236,74 +753,67 @@ class GameLevel extends Phaser.Scene {
             yPos += 150; 
         });
 
+        
+
+        // --- COLLISIONS ---
         this.physics.add.collider(this.player, this.blocks);
         this.physics.add.collider(this.blocks, this.blocks);
-        
         this.physics.add.collider(this.player, wallsLayer);
         this.physics.add.collider(this.blocks, wallsLayer);
-        
 
-        let restartBtn = this.add.text(750, 50, '↺', { 
-        fontSize: '40px', 
-        fill: '#ffffff',
-        backgroundColor: '#000000' 
-
-        
-    })
-    .setPadding(10)
-    .setOrigin(0.5)
-    .setScrollFactor(0) // <--- CRITICAL: Keeps it stuck to the screen!
-    .setInteractive({ useHandCursor: true });
-
-    // Restart Logic
-    restartBtn.on('pointerdown', () => {
-        this.scene.restart(); // Magically reloads the current level from scratch
-    });
-
-    // 2. PAUSE BUTTON (Two vertical lines)
-    let pauseBtn = this.add.text(680, 50, 'II', { 
-        fontSize: '30px', 
-        fill: '#ffffff',
-        backgroundColor: '#000000' 
-    })
-    .setPadding(10)
-    .setOrigin(0.5)
-    .setScrollFactor(0) 
-    .setInteractive({ useHandCursor: true });
-
-    // Pause Logic (Simple Toggle)
-    pauseBtn.on('pointerdown', () => {
-        if (this.physics.world.isPaused) {
-            this.physics.resume();
-            pauseBtn.setText('II'); // Change text back to Pause
-        } else {
-            this.physics.pause();
-            pauseBtn.setText('▶'); // Change text to Play
+        // --- MUSIC ---
+        if (!this.sound.get('game_music')) {
+            let music = this.sound.add('game_music', { loop: true, volume: 0.4 });
+            music.play();
+        } else if (!this.sound.get('game_music').isPlaying) {
+            this.sound.get('game_music').play();
         }
-    });
 
-    // 3. KEYBOARD SHORTCUT ("R" to Restart)
-    // This is super satisfying for puzzle games
-    this.input.keyboard.on('keydown-R', () => {
-        this.scene.restart();
-    });
+        // --- UI BUTTONS ---
+        let restartBtn = this.add.text(750, 50, '↺', { 
+            fontSize: '40px',
+            fontFamily: 'Ithaca',
+            fill: '#ffffff',
+            backgroundColor: '#000000' 
+        })
+        .setPadding(10)
+        .setOrigin(0.5)
+        .setScrollFactor(0)
+        .setInteractive({ useHandCursor: true });
 
-    // 4. ESCAPE KEY (Go back to Main Menu)
-    this.input.keyboard.on('keydown-ESC', () => {
-        this.scene.start('MainMenu');
-    });
+        restartBtn.on('pointerdown', () => {
+            this.scene.restart();
+        });
 
-    if (!this.sound.get('game_music')) {
-        // If it doesn't exist yet, add it
-        let music = this.sound.add('game_music', { loop: true, volume: 0.4 });
-        music.play();
-    } else if (!this.sound.get('game_music').isPlaying) {
-        // If it exists but stopped, play it
-        this.sound.get('game_music').play();
-    }
-     wallsLayer.setCollisionByExclusion([-1]); // Everything in 'Walls' layer stops the player
-        this.physics.add.collider(this.player, wallsLayer);
-        this.physics.add.collider(this.blocks, wallsLayer);
+        let pauseBtn = this.add.text(680, 50, 'II', { 
+            fontSize: '30px',
+            fontFamily: 'Ithaca',
+            fill: '#ffffff',
+            backgroundColor: '#000000' 
+        })
+        .setPadding(10)
+        .setOrigin(0.5)
+        .setScrollFactor(0) 
+        .setInteractive({ useHandCursor: true });
+
+        pauseBtn.on('pointerdown', () => {
+            if (this.physics.world.isPaused) {
+                this.physics.resume();
+                pauseBtn.setText('II');
+            } else {
+                this.physics.pause();
+                pauseBtn.setText('▶');
+            }
+        });
+
+        // --- KEYBOARD SHORTCUTS ---
+        this.input.keyboard.on('keydown-R', () => {
+            this.scene.restart();
+        });
+
+        this.input.keyboard.on('keydown-ESC', () => {
+            this.scene.start('MainMenu');
+        });
 
         // --- CAMERA & WORLD BOUNDS ---
     // 1. Calculate the real size of the map (since we scaled by 3)
@@ -321,12 +831,75 @@ class GameLevel extends Phaser.Scene {
     // This stops the camera from scrolling into the black void outside the map
     this.cameras.main.setBounds(0, 0, mapWidth, mapHeight);
     
-  
+    
+    // --- PORTAL SETUP ---
+        // 1. Create the Animation
+        this.anims.create({
+            key: 'portal-spin',
+            frames: this.anims.generateFrameNumbers('portal', { start: 0, end: 5 }), // Uses all 6 frames
+            frameRate: 10,
+            repeat: -1 // Loop forever
+        });
+
+        // 2. Create the Sprite (Hidden at first)
+        // Place portal at the configured position for this level
+        const portalPos = this.currentLevelData.portalPos;
+        this.portal = this.physics.add.sprite(portalPos.x, portalPos.y, 'portal');
+        this.portal.setScale(3);           // Make it big
+        this.portal.setVisible(false);     // Hide it!
+        this.portal.body.enable = false;   // Disable physics! (So you can't walk into it yet)
+
+        // 3. Add Collision (Player -> Portal)
+        // This triggers the level finish ONLY when the portal is active
+        this.physics.add.overlap(this.player, this.portal, () => {
+             // We only win if the portal is actually visible/enabled
+             if (this.portal.visible) {
+                 this.handleWin();
+             }
+        });
+
+        // --- CLIFF DROP LOGIC (FIXED) ---
+// 1. INITIALIZE THE GROUP (Crucial: prevents the 'undefined' error)
+this.cliffEdges = this.physics.add.staticGroup();
+
+const cliffObjs = map.getObjectLayer('CliffEdges')?.objects || [];
+
+cliffObjs.forEach(obj => {
+    // 2. POSITION THE TRIGGER: Multiplied by 3 to match game scale
+    let edge = this.cliffEdges.create(obj.x * 3, obj.y * 3, null).setOrigin(0, 0);
+    edge.setSize(obj.width * 3, obj.height * 3);
+    edge.setVisible(false);
+
+    // 3. LANDING COORDINATES: Use raw Tiled numbers (e.g., 260, 75)
+    // Multiply by 3 here because your game screen is 3x bigger than the Tiled map
+    const tx = obj.properties.find(p => p.name === 'landX')?.value || 0;
+    const ty = obj.properties.find(p => p.name === 'landY')?.value || 0;
+    
+    edge.landX = tx * 3; 
+    edge.landY = ty * 3;
+});
+
+// 4. OVERLAP TRIGGER
+this.physics.add.overlap(this.blocks, this.cliffEdges, (block, edge) => {
+    // Only drop if it's not already falling
+    if (edge.landX !== undefined) {
+        this.handleBlockDrop(block, edge.landX, edge.landY);
+    }
+}, null, this);
+        
     }
 
     update() {
+
+        
         
         if (this.isGameFinished) return;
+
+        // --- SKIP LEVEL CHEAT ---
+    if (Phaser.Input.Keyboard.JustDown(this.keyN)) {
+        console.log("Debug: Skipping Level " + this.currentLevelData.level);
+        this.handleWin(); 
+    }
 
         this.player.setVelocity(0);
 
@@ -354,13 +927,30 @@ class GameLevel extends Phaser.Scene {
             this.player.anims.play('idle-down', true);
         }
 
-        // --- BLOCK LOGIC ---
-        this.blocks.children.iterate((block) => {
-            if(block.updateText) block.updateText();
+      // --- BLOCK LOGIC ---
+        this.blocks.getChildren().forEach((block) => {
+            if (!block.active) return;
+            if (block.updateText) block.updateText();
 
-            if (Phaser.Geom.Intersects.RectangleToRectangle(block.body, this.targetZone.body)) {
+            // CHECK OVERLAP WITH PRESSURE PLATE
+            if (Phaser.Geom.Intersects.RectangleToRectangle(block.body, this.pressurePlate.body)) {
+                
                 if (block.value === this.correctAnswer) {
-                    this.handleWin();
+                    
+                    // A. VISUAL: Press the button down (Frame 30)
+                    this.pressurePlate.setFrame(31); 
+
+                    // B. SNAP: Move block to center for a satisfying "Click" feel
+                    block.x = this.pressurePlate.x;
+                    block.y = this.pressurePlate.y;
+
+                    // C. GAMEPLAY: Open Portal & Remove Block
+                    this.activatePortal(); 
+                    
+                    // Destroy text then block
+                    if (block.myText) block.myText.destroy();
+                    block.destroy(); 
+
                 } else {
                     this.handleGameOver();
                 }
@@ -387,69 +977,151 @@ class GameLevel extends Phaser.Scene {
             // CHECK INPUT
             if (Phaser.Input.Keyboard.JustDown(this.keyE)) {
                 
-               // --- FACE THE PLAYER (Final Corrected Version) ---
+               // --- FACE THE PLAYER ---
                 const dx = this.player.x - this.npc.x;
                 const dy = this.player.y - this.npc.y;
 
-                // 1. Reset Flip (We don't need it since you have real Left/Right frames)
                 this.npc.setFlipX(false);
 
                 if (Math.abs(dx) > Math.abs(dy)) {
-                    // --- HORIZONTAL (Left / Right) ---
                     if (dx > 0) {
-                        // Player is to the RIGHT (Positive)
-                        this.npc.setFrame(0); // You confirmed Frame 0 is Right
+                        this.npc.setFrame(0); // Player is RIGHT
                     } else {
-                        // Player is to the LEFT (Negative)
-                        this.npc.setFrame(2); // You confirmed Frame 2 is Left
+                        this.npc.setFrame(2); // Player is LEFT
                     }
                 } else {
-                    // --- VERTICAL (Up / Down) ---
                     if (dy > 0) {
-                        // Player is BELOW -> NPC looks Front
-                        this.npc.setFrame(3); 
+                        this.npc.setFrame(3); // Player is BELOW
                     } else {
-                        // Player is ABOVE -> NPC looks Back
-                        this.npc.setFrame(1); 
+                        this.npc.setFrame(1); // Player is ABOVE
                     }
-                
                 }
 
-                // --- TOGGLE DIALOGUE ---
-                let isVisible = this.dialogBox.visible;
-                this.dialogBox.setVisible(!isVisible);
-                
-                if (!isVisible) {
-                    this.dialogBox.setText(
+                // --- CALL ANIMATION FUNCTIONS ---
+                // Toggle: If off-screen, show it. If on-screen, hide it.
+                if (this.dialogContainer.y < 0) {
+                    this.showDialogue(
                         "PROF. PRIME:\n" +
                         "----------------\n" +
-                        "Stop! The Stagnation is here.\n" +
+                        "Hurry! You should run into\n" +
                         "Use Arrow Keys to move.\n" +
                         "Push the correct Answer Block into the Yellow Zone!"
                     );
+                } else {
+                    this.hideDialogue();
                 }
             }
-        } else {
+       } else {
             // Player is too far away
-            this.dialogBox.setVisible(false);
             this.interactPrompt.setVisible(false);
+            
+            // AUTO-CLOSE if player leaves
+            this.hideDialogue();
         }
     }
+
+    
     }
+
+  handleBlockDrop(block, destX, destY) {
+    if (block.isFalling) return;
+    block.isFalling = true;
+
+    // 1. Stop physics immediately
+    block.body.setVelocity(0, 0);
+    block.body.enable = false;
+
+    // 2. TWEEN ONLY THE BLOCK FOR SCALING
+    // We separate the block and text so the text doesn't get 'huge'
+    this.tweens.add({
+        targets: block,
+        x: destX,
+        y: destY,
+        scaleX: { from: 4, to: 3 }, // Block still 'jumps'
+        scaleY: { from: 4, to: 3 },
+        duration: 600,
+        ease: 'Cubic.easeOut',
+        onComplete: () => {
+            block.body.enable = true;
+            block.isFalling = false;
+        }
+    });
+
+    // 3. TWEEN THE TEXT FOR MOVEMENT ONLY
+    // This keeps the number the same size throughout the whole drop
+    this.tweens.add({
+        targets: block.myText,
+        x: destX,
+        y: destY,
+        duration: 600,
+        ease: 'Cubic.easeOut'
+    });
+}
+
+    activatePortal() {
+    if (this.portal.visible) return;
+
+    this.portal.setVisible(true);
+    this.portal.body.enable = true;
+    this.portal.play('portal-spin');
+
+    // --- NEW GATE OPEN LOGIC ---
+    if (this.gate) {
+        // Change the texture to the open version
+        this.gate.setTexture('gate_open');
+        
+        // Disable the physics body so the player can walk through it
+        this.gate.body.enable = false;
+    }
+
+    this.add.text(400, 300, "GATE OPENED!", { 
+        fontSize: '32px',
+        fontFamily: 'Ithaca',
+        color: '#00ff00', 
+        stroke: '#000', 
+        strokeThickness: 4 
+    })
+    .setOrigin(0.5)
+    .destroy({ fromScene: true, delay: 2000 });
+}
 
     handleWin() {
         this.isGameFinished = true;
         this.physics.pause();
         this.player.anims.stop(); // Stop animation
-        this.add.text(400, 300, 'CORRECT!', { fontSize: '64px', fill: '#0f0', backgroundColor: '#000' }).setOrigin(0.5);
+        
+        // 1. Create Level Complete Text
+        const completeText = this.add.text(400, 250, `LEVEL ${this.currentLevelData.level}\nCOMPLETE!`, { 
+            fontSize: '64px', 
+            fill: '#ffff00', 
+            backgroundColor: '#000',
+            fontFamily: 'Ithaca',
+            align: 'center'
+        }).setOrigin(0.5).setScrollFactor(0).setDepth(300);
+        
+        // 2. Scale animation - grow the text
+        this.tweens.add({
+            targets: completeText,
+            scale: 1.2,
+            duration: 500,
+            yoyo: true,
+            hold: 1000
+        });
 
-        this.time.delayedCall(2000, () => {
-            let nextLevelIndex = this.currentLevelData.level; 
-            if (nextLevelIndex < levels.length) {
-                this.scene.start('GameLevel', levels[nextLevelIndex]);
-            } else {
-                this.scene.start('MainMenu'); 
-            }
+        // 3. Wait then fade out
+        this.time.delayedCall(3000, () => {
+            // Fade to black
+            this.cameras.main.fade(500, 0, 0, 0);
+            
+            // Load next level after fade
+            this.time.delayedCall(600, () => {
+                let nextLevelIndex = this.currentLevelData.level; 
+                if (nextLevelIndex < levels.length) {
+                    this.scene.start('GameLevel', levels[nextLevelIndex]);
+                } else {
+                    this.scene.start('MainMenu'); 
+                }
+            });
         });
     }
 
@@ -457,10 +1129,63 @@ class GameLevel extends Phaser.Scene {
         this.isGameFinished = true;
         this.physics.pause();
         this.player.anims.stop();
-        this.add.text(400, 300, 'GAME OVER', { fontSize: '64px', fill: '#f00', backgroundColor: '#000' }).setOrigin(0.5);
+        this.add.text(400, 300, 'GAME OVER', { fontSize: '64px', fill: '#f00', backgroundColor: '#000', fontFamily: 'Ithaca' }).setOrigin(0.5);
 
         this.time.delayedCall(2000, () => {
             this.scene.start('MainMenu');
+        });
+    }
+
+    // HELPER: ANIMATE IN (Slide & Typewriter)
+    showDialogue(fullText) {
+        // 1. If already visible, do nothing
+        if (this.dialogContainer.y > 0) return;
+
+        this.dialogContainer.setVisible(true);
+        
+        // 2. SLIDE DOWN ANIMATION
+        this.tweens.add({
+            targets: this.dialogContainer,
+            y: 50,              // Target Y position (Screen Top)
+            duration: 500,      // Speed (ms)
+            ease: 'Power2.out'  // Smooth stopping effect
+        });
+
+        // 3. TYPEWRITER EFFECT
+        this.dialogText.setText(''); // Clear old text
+        let i = 0;
+        
+        // Stop any old typing timers if they exist
+        if (this.typingTimer) this.typingTimer.remove();
+
+        this.typingTimer = this.time.addEvent({
+            delay: 30, // Speed (lower = faster)
+            callback: () => {
+                this.dialogText.text += fullText[i];
+                i++;
+            },
+            repeat: fullText.length - 1
+        });
+    }
+
+    // HELPER: ANIMATE OUT
+    hideDialogue() {
+        // Only hide if it's currently on screen
+        if (this.dialogContainer.y < 0) return;
+
+        // Stop typing immediately
+        if (this.typingTimer) this.typingTimer.remove();
+
+        // SLIDE UP ANIMATION
+        this.tweens.add({
+            targets: this.dialogContainer,
+            y: -200,            // Go back off-screen
+            duration: 300,
+            ease: 'Power2.in',
+            onComplete: () => {
+                this.dialogContainer.setVisible(false);
+                this.dialogText.setText(''); // Clean up
+            }
         });
     }
 }
@@ -475,7 +1200,7 @@ const config = {
     roundPixels: true, // Forces Phaser to snap to whole numbers (prevents half-pixel gaps)
     physics: {
         default: 'arcade',
-        arcade: { debug: false }
+        arcade: { debug: true }
     },
     scene: [MainMenu, GameLevel] 
 };
