@@ -602,11 +602,6 @@ class GameLevel extends Phaser.Scene {
             wordWrap: { width: 600 }
         }).setOrigin(0.5).setScrollFactor(0).setDepth(100).setVisible(false);
 
-        
-
-
-        
-       
         // --- ANIMATION SETUP ---
         // 1. Idle (Row 1: Frames 0-5)
         this.anims.create({
@@ -709,17 +704,6 @@ class GameLevel extends Phaser.Scene {
     this.physics.add.collider(this.player, this.gate);
 }
 
-// --- STEP 3: WRAP THE CLIFF LOGIC ---
-// To stop the error for good, wrap your cliff overlap in this check:
-if (this.cliffEdges && this.cliffEdges.getLength() > 0) {
-    this.physics.add.overlap(this.blocks, this.cliffEdges, (block, edge) => {
-        if (edge.landX !== undefined) {
-            this.handleBlockDrop(block, edge.landX, edge.landY);
-        }
-    }, null, this);
-}
-
-
         // --- BLOCKS SETUP ---
         this.blocks = this.physics.add.group();
 
@@ -781,7 +765,15 @@ if (this.cliffEdges && this.cliffEdges.getLength() > 0) {
         .setScrollFactor(0)
         .setInteractive({ useHandCursor: true });
 
+            // For your Restart Button
         restartBtn.on('pointerdown', () => {
+            this.physics.pause(); // Stop physics first
+            this.scene.restart();
+        });
+
+        // For your Keyboard 'R' Shortcut
+        this.input.keyboard.on('keydown-R', () => {
+            this.physics.pause();
             this.scene.restart();
         });
 
@@ -807,10 +799,6 @@ if (this.cliffEdges && this.cliffEdges.getLength() > 0) {
         });
 
         // --- KEYBOARD SHORTCUTS ---
-        this.input.keyboard.on('keydown-R', () => {
-            this.scene.restart();
-        });
-
         this.input.keyboard.on('keydown-ESC', () => {
             this.scene.start('MainMenu');
         });
@@ -1115,9 +1103,10 @@ this.physics.add.overlap(this.blocks, this.cliffEdges, (block, edge) => {
             
             // Load next level after fade
             this.time.delayedCall(600, () => {
-                let nextLevelIndex = this.currentLevelData.level; 
-                if (nextLevelIndex < levels.length) {
-                    this.scene.start('GameLevel', levels[nextLevelIndex]);
+                let nextLevelNum = this.currentLevelData.level + 1; // Next level number
+                if (nextLevelNum <= levels.length) {
+                    // levels[0] = level 1, levels[1] = level 2, etc.
+                    this.scene.start('GameLevel', levels[nextLevelNum - 1]);
                 } else {
                     this.scene.start('MainMenu'); 
                 }
