@@ -297,7 +297,7 @@ class GameLevel extends Phaser.Scene {
         this.load.audio('victory_sfx', 'assets/victory.mp3');
         this.load.audio('gameover_sfx', 'assets/game-over.mp3');
 
-        for (let i = 1; i <= 26; i++) {
+        for (let i of [1, 2, 3, 4, 5, 6, 12, 20]) {
              this.load.tilemapTiledJSON(`level${i}`, `assets/level${i}.json`);
         }
         this.load.tilemapTiledJSON('correction_room', 'assets/correction_room.json');
