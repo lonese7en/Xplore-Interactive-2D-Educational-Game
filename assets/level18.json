@@ -185,19 +185,7 @@
          "draworder":"topdown",
          "id":15,
          "name":"MovingCart",
-         "objects":[
-                {
-                 "gid":6152,
-                 "height":18,
-                 "id":12,
-                 "name":"",
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":14,
-                 "x":-25,
-                 "y":221.5
-                }],
+         "objects":[],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,

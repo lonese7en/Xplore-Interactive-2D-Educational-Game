@@ -1,4 +1,4 @@
-// --- 1. SETUP CSS & CONTAINER (Fixes Desktop Sizing & Mobile Touch) ---
+
 const gameContainer = document.createElement('div');
 gameContainer.id = 'game-container';
 document.body.appendChild(gameContainer);
@@ -12,23 +12,23 @@ fontStyle.innerHTML = `
     body {
         margin: 0;
         padding: 0;
-        background-color: #111; /* Dark background for the webpage */
+        background-color: #111;
         height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
-        overflow: hidden; /* No scrollbars */
-        touch-action: none; /* CRITICAL: Stops mobile browser from scrolling */
+        overflow: hidden;
+        touch-action: none;
     }
     
     #game-container {
-        /* DESKTOP: Forces the game to stay at 800x600 centered */
+       
         width: 800px;
         height: 600px;
         box-shadow: 0 0 20px rgba(0,0,0,0.5);
     }
 
-    /* MOBILE: Overrides the fixed size to fill the phone screen */
+   
     @media (max-width: 800px), (max-height: 600px) {
         #game-container {
             width: 100vw;
@@ -38,7 +38,7 @@ fontStyle.innerHTML = `
 `;
 document.head.appendChild(fontStyle);
 
-// --- 2. CORRECTION ROOM QUESTIONS ---
+
 const correctionLevels = [
     { question: "Solve: 5x + 10 = 35", answer: 5, options: [5, 25, 10] },
     { question: "Simplify: x^2 * x^3", answer: "x^5", options: ["x^5", "x^6", "2x^5"] },
@@ -47,9 +47,9 @@ const correctionLevels = [
     { question: "Solve: 3(x - 2) = 9", answer: 5, options: [5, 3, 9] }
 ];
 
-// --- 3. MAIN GAME LEVELS ---
+
 const levels = [
-    // --- AREA 1: THE FOREST (Limits & Basic Power Rule) ---
+    
     { 
         level: 1,
         question: "Evaluate limit: lim(x->2) of (x + 3)", 
@@ -98,7 +98,7 @@ const levels = [
         level: 5,
         question: "Find derivative: y = 3x^4", 
         answer: "12x^3", 
-        options: ["12x^3", "3x^4", "12x", "4x^3"], // Added distraction
+        options: ["12x^3", "3x^4", "12x", "4x^3"], 
         playerStart: { x: 620, y: 1620 },
         blockStart: { x: 200, y: 250 },
         blockPositions: [{ x: 670, y: 1030 }, { x: 115, y: 790 }, { x: 798, y: 751 }, { x: 500, y: 900 }],
@@ -106,7 +106,7 @@ const levels = [
         portalPos: { x: 621, y: 286 },
         gatePos: { x: 578, y: 480 } 
     },
-    // --- AREA 2: THE RIVER (Exponential & Logarithmic Rules) ---
+    
     { 
         level: 6,
         question: "True or False: Derivative of e^x is e^x", 
@@ -122,12 +122,12 @@ const levels = [
         level: 7,
         question: "Find derivative: y = ln(x)", 
         answer: "1/x", 
-        options: ["1/x", "ln(x)", "e^x", "x"], // Added distraction
-        playerStart: { x: 400, y: 500 },
+        options: ["1/x", "ln(x)", "e^x", "x"], 
+        playerStart: { x: 117, y: 400 },
         blockStart: { x: 200, y: 250 },
-        blockPositions: [{ x: 200, y: 200 }, { x: 300, y: 300 }, { x: 400, y: 200 }, { x: 500, y: 300 }], 
-        answerZone: { x: 880, y: 358 },
-        portalPos: { x: 259, y: 167 }
+        blockPositions: [{ x: 189, y: 360 }, { x: 93, y: 294 }, { x: 665, y: 125 }, { x: 841, y: 395 }], 
+        answerZone: { x: 594, y: 666 },
+        portalPos: { x: 864, y: 666 }
     },
     { 
         level: 8,
@@ -136,9 +136,9 @@ const levels = [
         options: ["2e^(2x)", "e^(2x)", "2x", "e^x"], 
         playerStart: { x: 400, y: 500 },
         blockStart: { x: 200, y: 250 },
-        blockPositions: [{ x: 200, y: 200 }, { x: 300, y: 300 }, { x: 400, y: 200 }, { x: 500, y: 300 }],
-        answerZone: { x: 880, y: 358 },
-        portalPos: { x: 259, y: 167 }
+        blockPositions: [{ x: 200, y: 600 }, { x: 300, y: 600 }, { x: 400, y: 600 }, { x: 500, y: 600 }],
+        answerZone: { x: 790, y: 574 },
+        portalPos: { x: 528, y: 90 }
     },
     { 
         level: 9,
@@ -147,34 +147,34 @@ const levels = [
         options: ["1/x", "4/x", "4", "ln(4)"], 
         playerStart: { x: 400, y: 500 },
         blockStart: { x: 200, y: 250 },
-        blockPositions: [{ x: 200, y: 200 }, { x: 300, y: 300 }, { x: 400, y: 200 }, { x: 500, y: 300 }],
-        answerZone: { x: 880, y: 358 },
-        portalPos: { x: 259, y: 167 }
+        blockPositions: [{ x: 798, y: 157 }, { x: 791, y: 287 }, { x: 409, y: 387 }, { x: 405, y: 580 }],
+        answerZone: { x: 69, y: 337 },
+        portalPos: { x: 421, y: 290 }
     },
     { 
         level: 10,
         question: "Find derivative: y = 3^x", 
         answer: "3^x ln(3)", 
         options: ["3^x ln(3)", "3^x", "x3^(x-1)", "ln(3)"], 
-        playerStart: { x: 400, y: 500 },
+        playerStart: { x: 740, y: 553 },
         blockStart: { x: 200, y: 250 },
-        blockPositions: [{ x: 200, y: 200 }, { x: 300, y: 300 }, { x: 400, y: 200 }, { x: 500, y: 300 }],
-        answerZone: { x: 880, y: 358 },
-        portalPos: { x: 259, y: 167 }
+        blockPositions: [{ x: 610, y: 97 }, { x: 143, y: 107 }, { x: 67, y: 557 }, { x: 253, y: 393 }],
+        answerZone: { x: 343, y: 360 },
+        portalPos: { x: 43, y: 347 }
     },
     { 
         level: 11,
         question: "Find derivative: y = 3e^(2x) - 5ln(x)", 
         answer: "6e^(2x)-5/x", 
         options: ["6e^(2x)-5/x", "3e^(2x)-5/x", "6e^(2x)-5", "e^(2x)"], 
-        playerStart: { x: 400, y: 500 },
+        playerStart: { x: 361, y: 1533 },
         blockStart: { x: 200, y: 250 },
-        blockPositions: [{ x: 200, y: 200 }, { x: 300, y: 300 }, { x: 400, y: 200 }, { x: 500, y: 300 }],
-        answerZone: { x: 880, y: 358 },
+        blockPositions: [{ x: 224, y: 1283 }, { x: 391, y: 1150 }, { x: 1057, y: 1177 }, { x: 549, y: 1390 }],
+        answerZone: { x: 694, y: 597 },
         gatePos: { x: 578, y: 480 },
-        portalPos: { x: 259, y: 167 }
+        portalPos: { x: 363, y: 234 }
     },
-    // --- AREA 3: THE CAVE (Chain Rule & Advanced Log Rules) ---
+    
     { 
         level: 12,
         question: "Derivative of y = ln(2x+1)", 
@@ -194,8 +194,8 @@ const levels = [
         playerStart: { x: 463, y: 410 },
         blockStart: { x: 250, y: 100 },
         blockPositions: [{ x: 349, y: 568 }, { x: 420, y: 568 }, { x: 480, y: 568 }],
-        answerZone: { x: 851, y: 437 },
-        portalPos: { x: 500, y: 309 }
+        answerZone: { x: 566, y: 280 },
+        portalPos: { x: 547, y: 124 }
     },
     { 
         level: 14,
@@ -204,9 +204,9 @@ const levels = [
         options: ["1/(x ln5)", "1/5x", "5/x"],
         playerStart: { x: 463, y: 410 },
         blockStart: { x: 250, y: 100 },
-        blockPositions: [{ x: 349, y: 568 }, { x: 420, y: 568 }, { x: 480, y: 568 }],
-        answerZone: { x: 851, y: 437 },
-        portalPos: { x: 500, y: 309 }
+        blockPositions: [{ x: 90, y: 103 }, { x: 286, y: 103 }, { x: 886, y: 80 }],
+        answerZone: { x: 610, y: 253 },
+        portalPos: { x: 600, y: 103 }
     },
     { 
         level: 15,
@@ -215,20 +215,20 @@ const levels = [
         options: ["2xe^(x^2)", "e^(x^2)", "2x"],
         playerStart: { x: 463, y: 410 },
         blockStart: { x: 250, y: 100 },
-        blockPositions: [{ x: 349, y: 568 }, { x: 420, y: 568 }, { x: 480, y: 568 }],
-        answerZone: { x: 851, y: 437 },
-        portalPos: { x: 500, y: 309 }
+        blockPositions: [{ x: 100, y: 287 }, { x: 856, y: 287 }, { x: 460, y: 583 }],
+        answerZone: { x: 462, y: 120 },
+        portalPos: { x: 462, y: 300 }
     },
     { 
         level: 16,
         question: "Derivative of y = 2^(3x)", 
         answer: "3(2^3x)ln2", 
         options: ["3(2^3x)ln2", "2^(3x)ln2", "6^x"],
-        playerStart: { x: 463, y: 410 },
+        playerStart: { x: 890, y: 303 },
         blockStart: { x: 250, y: 100 },
-        blockPositions: [{ x: 606, y: 66 }, { x: 420, y: 568 }, { x: 480, y: 568 }],
-        answerZone: { x: 851, y: 437 },
-        portalPos: { x: 500, y: 309 }
+        blockPositions: [{ x: 645, y: 119 }, { x: 343, y: 286 }, { x: 513, y: 590 }],
+        answerZone: { x: 90, y: 310 },
+        portalPos: { x: 553, y: 310 }
     },
     { 
         level: 17,
@@ -237,40 +237,40 @@ const levels = [
         options: ["1/(x ln2)", "1/2x", "2/x"],
         playerStart: { x: 463, y: 410 },
         blockStart: { x: 250, y: 100 },
-        blockPositions: [{ x: 606, y: 66 }, { x: 420, y: 568 }, { x: 480, y: 568 }],
-        answerZone: { x: 851, y: 437 },
-        portalPos: { x: 500, y: 309 }
+        blockPositions: [{ x: 535, y: 568 }, { x: 420, y: 568 }, { x: 480, y: 568 }],
+        answerZone: { x: 153, y: 270 },
+        portalPos: { x: 892, y: 251 }
     },
     { 
         level: 18,
         question: "Find y' if y = ln(4x^2) at x=3", 
         answer: "2/3", 
         options: ["2/3", "1/3", "1/4", "3/2"], 
-        playerStart: { x: 463, y: 900 },
+        playerStart: { x: 220, y: 1553 },
         blockStart: { x: 250, y: 100 },
-        blockPositions: [{ x: 480, y: 900 }, { x: 420, y: 568 }, { x: 480, y: 962 }, { x: 350, y: 800 }],
+        blockPositions: [{ x: 1036, y: 1397 }, { x: 1026, y: 1070 }, { x: 973, y: 1553 }, { x: 1036, y: 1500 }],
         answerZone: { x: 630, y: 912 },
         portalPos: { x: 600, y: 102 },
         gatePos: { x: 452, y: 550 }
     },
-    // --- AREA 4: THE LABORATORY (Applications & Multi-Answer Assembly) ---
+    
     { 
         level: 19,
         question: "Find rate of change: y = 500e^(0.04t)", 
         answer: "20e^(0.04t)", 
-        options: ["20e^(0.04t)", "500e", "0.04t", "20", "e", "t"], // Distractions
-        playerStart: { x: 400, y: 500 },
+        options: ["20e^(0.04t)", "500e", "0.04t", "20", "e", "t"], 
+        playerStart: { x: 133, y: 230 },
         blockStart: { x: 100, y: 100 },
         blockPositions: [
-            { x: 200, y: 200 }, { x: 400, y: 200 }, { x: 600, y: 200 },
-            { x: 200, y: 350 }, { x: 400, y: 350 }, { x: 600, y: 350 }
+            { x: 200, y: 620 }, { x: 400, y: 620 }, { x: 600, y: 620 },
+            { x: 200, y: 660 }, { x: 400, y: 660 }, { x: 600, y: 660 }
         ],
-        answerZone: { x: 860, y: 379 }, 
-        portalPos: { x: 860, y: 379 }
+        answerZone: { x: 363, y: 201 }, 
+        portalPos: { x: 95, y: 220 }
     },
     { 
         level: 20,
-        question: "Bacteria N(t)=500e^(0.04t). Rate at t=10? (Assemble: 29.8)", 
+        question: "Bacteria N(t)=500e^(0.04t). Rate at t=10?", 
         answer: "29.8", 
         multiAnswer: true,
         slots: [
@@ -278,7 +278,7 @@ const levels = [
             { x: 502, y: 146, requiredValue: "9" },
             { x: 547, y: 146, requiredValue: ".8" }
         ],
-        options: ["2", "9", ".8", "5", "0", "1", "3", "7", "4", "6", "8", "."], // HEAVY Distractions
+        options: ["2", "9", ".8", "5", "0", "1", "3", "7", "4", "6", "8", "."], 
         playerStart: { x: 400, y: 500 },
         blockStart: { x: 100, y: 100 },
         blockPositions: [
@@ -295,20 +295,20 @@ const levels = [
         answer: "0.2", 
         multiAnswer: true,
         slots: [
-            { x: 455, y: 146, requiredValue: "0" },
-            { x: 502, y: 146, requiredValue: "." },
-            { x: 547, y: 146, requiredValue: "2" }
+            { x: 600, y: 1400, requiredValue: "0" },
+            { x: 650, y: 1400, requiredValue: "." },
+            { x: 700, y: 1400, requiredValue: "2" }
         ],
-        options: ["0", ".", "2", "5", "1", "9", "8", "3", "4", "7"], // Distractions
-        playerStart: { x: 400, y: 500 },
+        options: ["0", ".", "2", "5", "1", "9", "8", "3", "4", "7"], 
+        playerStart: { x: 140, y: 183 },
         blockStart: { x: 100, y: 100 },
         blockPositions: [
-            { x: 200, y: 200 }, { x: 300, y: 200 }, { x: 400, y: 200 }, { x: 500, y: 200 },
-            { x: 200, y: 350 }, { x: 300, y: 350 }, { x: 400, y: 350 }, { x: 500, y: 350 },
-            { x: 200, y: 500 }, { x: 300, y: 500 }
+            { x: 1027, y: 520 }, { x: 711, y: 140 }, { x: 360, y: 1470 }, { x: 500, y: 200 },
+            { x: 878, y: 1530 }, { x: 325, y: 1270 }, { x: 287, y: 390 }, { x: 153, y: 470 },
+            { x: 960, y: 260 }, { x: 1060, y: 260 }
         ],
         answerZone: { x: 0, y: 0 }, 
-        portalPos: { x: 860, y: 379 }
+        portalPos: { x: 640, y: 1207 }
     },
     { 
         level: 22,
@@ -316,73 +316,73 @@ const levels = [
         answer: "1.5", 
         multiAnswer: true,
         slots: [
-            { x: 455, y: 146, requiredValue: "1" },
-            { x: 502, y: 146, requiredValue: "." },
-            { x: 547, y: 146, requiredValue: "5" }
+            { x: 737, y: 1320, requiredValue: "1" },
+            { x: 787, y: 1320, requiredValue: "." },
+            { x: 837, y: 1320, requiredValue: "5" }
         ],
-        options: ["1", ".", "5", "0", "2", "3", "7", "8", "9", "4"], // Distractions
-        playerStart: { x: 400, y: 500 },
+        options: ["1", ".", "5", "0", "2", "3", "7", "8", "9", "4"], 
+        playerStart: { x: 127, y: 260 },
         blockStart: { x: 100, y: 100 },
         blockPositions: [
-            { x: 150, y: 200 }, { x: 250, y: 200 }, { x: 350, y: 200 }, { x: 450, y: 200 },
-            { x: 150, y: 350 }, { x: 250, y: 350 }, { x: 350, y: 350 }, { x: 450, y: 350 },
-            { x: 150, y: 500 }, { x: 250, y: 500 }
+            { x: 151, y: 1393 }, { x: 791, y: 190 }, { x: 207, y: 839 }, { x: 395, y: 1510 },
+            { x: 331, y: 717 }, { x: 982, y: 597 }, { x: 1089, y: 281 }, { x: 1056, y: 190 },
+            { x: 504, y: 190 }, { x: 241, y: 190 }
         ],
         answerZone: { x: 0, y: 0 }, 
-        portalPos: { x: 860, y: 379 }
+        portalPos: { x: 973, y: 1573 }
     },
     { 
         level: 23,
         question: "Acidity A(x)=log(7x^5). Rate at x=1?", 
         answer: "5", 
-        multiAnswer: false, // Simple answer
-        options: ["5", "7", "1", "3", "0", "9", "2", "8"], // Distractions
-        playerStart: { x: 400, y: 500 },
+        multiAnswer: false, 
+        options: ["5", "7", "1", "3", "0", "9", "2", "8"], 
+        playerStart: { x: 593, y: 140 },
         blockStart: { x: 100, y: 100 },
         blockPositions: [
-            { x: 200, y: 200 }, { x: 300, y: 200 }, { x: 400, y: 200 }, { x: 500, y: 200 },
-            { x: 200, y: 350 }, { x: 300, y: 350 }, { x: 400, y: 350 }, { x: 500, y: 350 }
+            { x: 207, y: 1293 }, { x: 900, y: 1293 }, { x: 983, y: 647 }, { x: 700, y: 647 },
+            { x: 400, y: 647 }, { x: 606, y: 160 }, { x: 700, y: 1293 }, { x: 900, y: 1293 }
         ],
-        answerZone: { x: 860, y: 379 }, 
-        portalPos: { x: 860, y: 379 }
+        answerZone: { x: 593, y: 1530 }, 
+        portalPos: { x: 593, y: 1219 }
     },
     { 
         level: 24,
         question: "Pressure P(t)=log(2t^4). Rate at t=3?", 
         answer: "4/3", 
         multiAnswer: false,
-        options: ["4/3", "3/4", "2", "1/2", "3", "4", "1", "0"], // Distractions
-        playerStart: { x: 400, y: 500 },
+        options: ["4/3", "3/4", "2", "1/2", "3", "4", "1", "0"], 
+        playerStart: { x: 250, y: 197 },
         blockStart: { x: 100, y: 100 },
         blockPositions: [
-            { x: 200, y: 200 }, { x: 300, y: 200 }, { x: 400, y: 200 }, { x: 500, y: 200 },
-            { x: 200, y: 350 }, { x: 300, y: 350 }, { x: 400, y: 350 }, { x: 500, y: 350 }
+            { x: 953, y: 178 }, { x: 249, y: 1189 }, { x: 139, y: 1165 }, { x: 1070, y: 178 },
+            { x: 990, y: 595 }, { x: 633, y: 638 }, { x: 180, y: 190 }, { x: 177, y: 637 }
         ],
-        answerZone: { x: 860, y: 379 }, 
-        portalPos: { x: 860, y: 379 }
+        answerZone: { x: 195, y: 1572 }, 
+        portalPos: { x: 535, y: 1242 }
     },
     { 
         level: 25,
         question: "Pos s(t)=t^2. Find velocity v(t).", 
         answer: "2t", 
         multiAnswer: false,
-        options: ["2t", "t", "t^2", "2", "t/2", "2t^2", "1", "0"], // Distractions
-        playerStart: { x: 438, y: 2237 },
+        options: ["2t", "t", "t^2", "2", "t/2", "2t^2", "1", "0"], 
+        playerStart: { x: 435, y: 2287 },
         blockStart: { x: 100, y: 100 },
         blockPositions: [
-            { x: 1060, y: 2040 }, { x: 1060, y: 2086 }, { x: 1060, y: 2130 },
-            { x: 1060, y: 2200 }, { x: 1060, y: 2237 }, { x: 1060, y: 2300 },
-            { x: 1150, y: 2100 }, { x: 1150, y: 2200 }
+            { x: 1547, y: 1491 }, { x: 205, y: 2001 }, { x: 253, y: 2036 },
+            { x: 1547, y: 1594 }, { x: 1060, y: 2237 }, { x: 107, y: 1544 },
+            { x: 107, y: 1637 }, { x: 353, y: 1554 }
         ],
-        answerZone: { x: 1315, y: 2040 }, // Using a zone near the gate
-        portalPos: { x: 860, y: 379 } // Placeholder, cutscene handles exit
+        answerZone: { x: 1368, y: 2067 }, 
+        portalPos: { x: 860, y: 379 } 
     },
     { 
         level: 26,
         question: "Integration: Area under y=x from 0 to 4", 
         answer: "8", 
-        multiAnswer: false, // It's a single block answer
-        options: [8, 4, 16], // Options from PDF
+        multiAnswer: false, 
+        options: [8, 4, 16], 
         playerStart: { x: 843, y: 590 }, 
         blockStart: { x: 100, y: 100 },
         blockPositions: [],
@@ -391,7 +391,7 @@ const levels = [
     }
 ];
 
-// --- 4. SCENES ---
+
 
 class MainMenu extends Phaser.Scene {
     constructor() { super('MainMenu'); }
@@ -412,15 +412,24 @@ class MainMenu extends Phaser.Scene {
     }
 
     create() {
-        this.sound.getAll().forEach(sound => {
-        // If the sound key DOES NOT contain 'bgm', destroy it.
-        if (!sound.key.includes('bgm')) {
-            sound.stop();
-            sound.destroy();
-        }
-    });
+
         this.input.setDefaultCursor('url(assets/cursor.png), pointer');
         this.input.on('pointerup', () => { this.input.setDefaultCursor('url(assets/cursor.png), pointer'); });
+        this.events.on('shutdown', () => {
+            ['arrow_loop', 'cart_loop', 'fire_loop', 'laser_loop'].forEach(key => {
+                this.sound.getAll(key).forEach(s => {
+                    s.stop();
+                    s.destroy();
+                });
+            });
+            this.sound.getAll().forEach(sound => {
+                if (!sound.key.includes('bgm') && sound.key !== 'title_music') {
+                    sound.stop();
+                    sound.destroy();
+                }
+            });
+        });
+            
 
         this.scrollingBg = this.add.tileSprite(400, 300, 800, 600, 'menu_bg');
         this.scrollingBg.setTileScale(0.5); 
@@ -487,8 +496,6 @@ class MainMenu extends Phaser.Scene {
             }
         }, canContinue);
 
-        let demoText = this.add.text(780, 580, 'DEMO VERSION', { fontSize: '16px', fill: '#ff0000', fontFamily: 'monospace' }).setOrigin(1, 1);
-        this.tweens.add({ targets: demoText, alpha: 0, duration: 800, yoyo: true, repeat: -1 });
     }
 
     update() {
@@ -499,7 +506,7 @@ class MainMenu extends Phaser.Scene {
     }
 }
 
-// --- NEW CLASS: MOBILE CONTROLS (FIXED DETECTION) ---
+
 class MobileControls {
     constructor(scene) {
         this.scene = scene;
@@ -508,7 +515,7 @@ class MobileControls {
         this.up = false;
         this.down = false;
 
-        // Only show mobile controls on actual mobile devices, not on desktop with resized windows
+        
         const isMobileOS = !this.scene.sys.game.device.os.desktop;
 
         if (isMobileOS) {
@@ -517,22 +524,19 @@ class MobileControls {
     }
 
     createControls() {
-        this.scene.input.addPointer(2); // Enable Multi-touch
-
-        // We use the GAME config size (800x600), not the window size
-        // This ensures buttons stay in place even if the screen scales
+        this.scene.input.addPointer(2); 
         const gameWidth = 800; 
         const gameHeight = 600;
 
-        // --- D-PAD CONFIG (Bottom Left) ---
+        
         const dpadX = 110;
         const dpadY = gameHeight - 110; 
         const radius = 38;
         
         const createBtn = (x, y, rotation, propName) => {
             let btn = this.scene.add.circle(x, y, radius, 0xffffff, 0.2)
-                .setScrollFactor(0) // CRITICAL: Sticks to camera
-                .setDepth(9999)     // CRITICAL: Renders on top of everything
+                .setScrollFactor(0) 
+                .setDepth(9999)     
                 .setInteractive();
             
             let arrow = this.scene.add.text(x, y, '➤', { fontSize: '24px', color: '#ffffff', fontStyle: 'bold' })
@@ -541,7 +545,6 @@ class MobileControls {
                 .setScrollFactor(0)
                 .setDepth(10000);
 
-            // Capture "this" correctly
             const mobileCtrl = this; 
             
             const press = () => { 
@@ -554,18 +557,17 @@ class MobileControls {
             };
 
             btn.on('pointerdown', press);
-            // "pointerover" allows you to slide your thumb onto the button
             btn.on('pointerover', (pointer) => { if (pointer.isDown) press(); });
             btn.on('pointerup', release);
             btn.on('pointerout', release);
         };
 
-        createBtn(dpadX, dpadY - 65, -Math.PI / 2, 'up');    // UP
-        createBtn(dpadX, dpadY + 65, Math.PI / 2, 'down');   // DOWN
-        createBtn(dpadX - 65, dpadY, Math.PI, 'left');       // LEFT
-        createBtn(dpadX + 65, dpadY, 0, 'right');            // RIGHT
+        createBtn(dpadX, dpadY - 65, -Math.PI / 2, 'up');    
+        createBtn(dpadX, dpadY + 65, Math.PI / 2, 'down');   
+        createBtn(dpadX - 65, dpadY, Math.PI, 'left');       
+        createBtn(dpadX + 65, dpadY, 0, 'right');            
 
-        // --- ACTION BUTTON (Bottom Right) ---
+        
         const actionX = gameWidth - 100;
         const actionY = gameHeight - 110;
 
@@ -605,9 +607,9 @@ class GameLevel extends Phaser.Scene {
         this.footstepTimer = 0;
         this.currentBGMKey = null; 
         this.isBossRetry = data.isBossRetry || false;
-        this.cutscenePlayed = false;      // Reset the Gate Cutscene flag
-    this.evilRevealPlayed = false;    // Reset the Evil Reveal flag
-    this.isCutscenePlaying = false;   // Ensure controls are unlocked
+        this.cutscenePlayed = false;      
+    this.evilRevealPlayed = false;    
+    this.isCutscenePlaying = false;   
     }
 
     preload() {
@@ -622,11 +624,11 @@ class GameLevel extends Phaser.Scene {
         this.load.spritesheet('hero_sheet', 'assets/player.png', { frameWidth: 48, frameHeight: 48 });
         this.load.image('wall', 'assets/wall.png');
         this.load.spritesheet('professor', 'assets/doctor.png', { frameWidth: 16, frameHeight: 32 });
-        // CHANGE frameWidth from 16 to 32
-this.load.spritesheet('professor_new', 'assets/professor_new.png', { 
-    frameWidth: 16, 
-    frameHeight: 32 
-});
+        
+        this.load.spritesheet('professor_new', 'assets/professor_new.png', { 
+        frameWidth: 16, 
+        frameHeight: 32 
+        });
         this.load.spritesheet('sunny_tiles_png', 'assets/spr_tileset_sunnysideworld_16px.png', { frameWidth: 16, frameHeight: 16, margin: 1, spacing: 2 });
         this.load.spritesheet('gem_blue', 'assets/spr_coin_azu.png', { frameWidth: 16, frameHeight: 16 });
         this.load.spritesheet('gem_green', 'assets/spr_coin_strip4.png', { frameWidth: 16, frameHeight: 16 });
@@ -652,16 +654,17 @@ this.load.spritesheet('professor_new', 'assets/professor_new.png', {
         this.load.audio('victory_sfx', 'assets/victory.mp3');
         this.load.audio('gameover_sfx', 'assets/game-over.mp3');
         this.load.image('MovingCart', 'assets/MovingCart.png');
+        this.load.audio('arrow_loop', 'assets/arrow_sfx.mp3');
         this.load.image('arrow', 'assets/arrow.png');
         this.load.image('vignette', 'assets/vignette.png');
         this.load.audio('boss_bgm', 'assets/boss_music.mp3');
-        this.load.audio('laser_loop', 'assets/laser_hum.mp3'); // A static electric hum
-this.load.audio('cart_loop', 'assets/cart_rumble.mp3'); // A mechanical rolling sound
-this.load.audio('fire_loop', 'assets/fire_burning.mp3'); // A crackling fire sound
+        this.load.audio('laser_loop', 'assets/laser_hum.mp3'); 
+        this.load.audio('cart_loop', 'assets/cart_rumble.mp3'); 
+        this.load.audio('fire_loop', 'assets/fire_burning.mp3'); 
         this.load.spritesheet('laser', 'assets/lasers_spritesheet.png', { 
-    frameWidth: 32, 
-    frameHeight: 32 
-});
+        frameWidth: 32, 
+        frameHeight: 32 
+        });
 
         for (let i of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]) {
              this.load.tilemapTiledJSON(`level${i}`, `assets/level${i}.json`);
@@ -684,19 +687,17 @@ this.load.audio('fire_loop', 'assets/fire_burning.mp3'); // A crackling fire sou
 
         if (this.isCorrectionRoom) {
     targetMusicKey = 'correction_bgm';
-} 
-// --- ADD THIS CHECK FOR LEVEL 26 ---
-else if (currentLvl === 26) {
-    targetMusicKey = 'boss_bgm';
-} 
-// -----------------------------------
-else if (currentLvl >= 19) {
-    targetMusicKey = 'lab_bgm';
-} else if (currentLvl >= 12) {
-    targetMusicKey = 'cave_bgm';
-} else if (currentLvl >= 6) {
-    targetMusicKey = 'river_bgm';
-}
+        } 
+        else if (currentLvl === 26) {
+            targetMusicKey = 'boss_bgm';
+        } 
+        else if (currentLvl >= 19) {
+            targetMusicKey = 'lab_bgm';
+        } else if (currentLvl >= 12) {
+            targetMusicKey = 'cave_bgm';
+        } else if (currentLvl >= 6) {
+            targetMusicKey = 'river_bgm';
+        }
 
         let playingBGM = this.sound.getAll().find(s => s.isPlaying && s.key.includes('bgm'));
         
@@ -711,25 +712,21 @@ else if (currentLvl >= 19) {
             targetSound.play();
         }
 
-        let demoText = this.add.text(780, 580, 'DEMO VERSION', { fontSize: '16px', fill: '#ff0000', fontFamily: 'monospace' })
-            .setOrigin(1, 1).setScrollFactor(0).setDepth(1000);
-        this.tweens.add({ targets: demoText, alpha: 0, duration: 800, yoyo: true, repeat: -1 });
-
        let mapKey;
 
 if (this.isCorrectionRoom) {
     mapKey = 'correction_room';
 } else {
-    // --- THE TRICK ---
-    // If we are on Level 26, use the Level 25 map file
+    
+    
     if (this.currentLevelData.level === 26) {
         mapKey = 'level25'; 
     } else {
-        // Otherwise, look for the normal map (level1, level2, etc.)
+        
         mapKey = `level${this.currentLevelData.level}`;
     }
 
-    // Safety fallback
+    
     if (!this.cache.tilemap.exists(mapKey)) mapKey = 'level1';
 }
         
@@ -751,7 +748,7 @@ if (this.isCorrectionRoom) {
 if (overheadLayer) {
     overheadLayer.setScale(3);
     
-    // CRITICAL: Set depth higher than player (50) and lasers (usually 0-30)
+    
     overheadLayer.setDepth(100); 
 }
 
@@ -763,10 +760,10 @@ if (overheadLayer) {
         if (!this.anims.exists('fire-anim')) {
     this.anims.create({
         key: 'fire-anim',
-        // Play all frames (0 to 24 approx)
+
         frames: this.anims.generateFrameNumbers('fireball', { start: 0, end: 24 }), 
-        frameRate: 20, // Fast fire!
-        repeat: -1     // Loop forever
+        frameRate: 20, 
+        repeat: -1     
     });
 }
 
@@ -781,7 +778,7 @@ if (overheadLayer) {
        if (!this.anims.exists('lab-portal-idle')) {
     this.anims.create({
         key: 'lab-portal-idle',
-        frames: this.anims.generateFrameNumbers('lab_portal', { start: 0, end: 3 }), // Check if you have 4 frames (0-3) or more!
+        frames: this.anims.generateFrameNumbers('lab_portal', { start: 0, end: 3 }), 
         frameRate: 8,
         repeat: -1
     });
@@ -794,8 +791,8 @@ if (overheadLayer) {
         let startY = this.isCorrectionRoom ? 300 : this.currentLevelData.playerStart.y;
 
         this.movingPlatforms = this.physics.add.group({
-        allowGravity: false, // Platforms float
-        immovable: true      // Player cannot push them
+        allowGravity: false, 
+        immovable: true      
     });
         this.player = this.physics.add.sprite(startX, startY, 'hero_sheet');
         this.player.play('idle-down'); 
@@ -822,7 +819,7 @@ if (overheadLayer) {
 
         this.stoneGates = this.physics.add.group({ immovable: true, allowGravity: false }); 
         if (!this.isCorrectionRoom && this.currentLevelData.gatePos) {
-            // let g = this.stoneGates.create(this.currentLevelData.gatePos.x, this.currentLevelData.gatePos.y, 'gate_locked');
+            
             const isLab = (this.currentLevelData.level >= 18);
             const textureKey = isLab ? 'scifi_gate_closed' : 'gate_locked';
             let gate = this.stoneGates.create(
@@ -835,11 +832,11 @@ if (overheadLayer) {
     
     gate.setScale(size).setOrigin(0, 0).setDepth(40).setVisible(true);
     
-    // 5. Adjust Hitbox
-    // Refresh the physics body to match the new scale/texture size
+    
+    
     gate.body.setSize(gate.width, gate.height);
 
-    // 6. Tag it
+    
     gate.isSciFi = isLab;
         }
         this.physics.add.collider(this.player, this.stoneGates);
@@ -851,33 +848,33 @@ if (overheadLayer) {
         this.setupUI(); 
 
         this.answerSlots = []; 
-this.levelLabels = []; // <--- NEW: Create the Death Note list
+this.levelLabels = []; 
 
 this.answerSlots = []; 
-        this.levelLabels = []; // Keep your death note list!
+        this.levelLabels = []; 
 
-        // --- 1. MULTI-SLOT LOGIC (For complex answers like "29.8") ---
+        
         if (this.isMultiSlot) {
             this.currentLevelData.slots.forEach((slotData, index) => {
-                // Determine Texture: Use 'lab_portal' for Lab (19+), 'floor_items' for others
+                
                 const isLab = (this.currentLevelData.level >= 19);
                 let textureKey = isLab ? 'lab_portal' : 'floor_items';
                 
                 let plate = this.physics.add.sprite(slotData.x, slotData.y, textureKey);
                 plate.setScale(3).setImmovable(true).setDepth(5); 
 
-                // Setup Animation & Hitbox
+                
                 if (isLab) {
                     plate.play('lab-portal-idle'); 
                     plate.body.setSize(12, 12).setOffset(2, 2); 
                 } else {
-                    plate.setFrame(30); // Old pressure plate frame
+                    plate.setFrame(30); 
                     plate.body.setSize(10, 10).setOffset(3, 3);
                 }
 
                 plate.requiredValue = slotData.requiredValue; 
                 
-                // Label (Part 1, Part 2, etc.)
+                
                 let label = this.add.text(slotData.x, slotData.y - 40, `Part ${index + 1}`, { 
                     fontSize: '16px', fontFamily: 'Ithaca', fill: '#ffff00', stroke: '#000', strokeThickness: 3 
                 }).setOrigin(0.5);
@@ -888,30 +885,30 @@ this.answerSlots = [];
                 this.answerSlots.push(plate);
             });
         } 
-        // --- 2. SINGLE-SLOT LOGIC (Now supports Portals!) ---
+        
         else {
             let ansX = this.isCorrectionRoom ? 600 : this.currentLevelData.answerZone.x;
             let ansY = this.isCorrectionRoom ? 400 : this.currentLevelData.answerZone.y;
             
             const isLab = (this.currentLevelData.level >= 19);
             
-            // A. Create the correct sprite type
+            
             if (isLab) {
-                // LAB AREA: Use the Portal Sprite
+                
                 this.pressurePlate = this.physics.add.sprite(ansX, ansY, 'lab_portal');
                 this.pressurePlate.play('lab-portal-idle');
                 this.pressurePlate.body.setSize(12, 12).setOffset(2, 2);
             } else {
-                // NORMAL AREA: Use the Stone Plate
+                
                 this.pressurePlate = this.physics.add.sprite(ansX, ansY, 'floor_items');
                 this.pressurePlate.setFrame(30);
                 this.pressurePlate.body.setSize(10, 10).setOffset(3, 3);
             }
 
-            // B. Common Settings
+            
             this.pressurePlate.setScale(3).setImmovable(true).setDepth(5);
             
-            // Add "ANSWER" label for single slots in Lab (Optional, but looks cool)
+            
             if (isLab) {
                 let label = this.add.text(ansX, ansY - 40, "ANSWER", { 
                     fontSize: '16px', fontFamily: 'Ithaca', fill: '#ffff00', stroke: '#000', strokeThickness: 3 
@@ -966,20 +963,20 @@ this.answerSlots = [];
              if (edge.landX !== undefined) this.handleBlockDrop(block, edge.landX, edge.landY);
         }, null, this);
 
-      // --- LEVEL 26: PROFESSOR SETUP (UPDATED) ---
+      
 if (this.currentLevelData.level === 25) {
-    // 1. Spawn Professor (Standing below the gate)
-    // Gate Y is 1150, so we put him at 1200 to stand in front of it
+    
+    
     this.npc = this.physics.add.sprite(882, 1360, 'professor_new'); 
 this.npc.setScale(3).setFrame(3);
-this.npc.play('prof-idle-up'); // <--- CHANGE THIS (Was setFrame or wrong anim)
+this.npc.play('prof-idle-up'); 
 this.npc.setImmovable(true).setDepth(20);
 
 this.npcMarker = this.add.text(this.npc.x, this.npc.y - 50, '!', {
         fontSize: '32px', fontFamily: 'Ithaca', fill: '#ffff00', stroke: '#000', strokeThickness: 4
     }).setOrigin(0.5).setDepth(60);
     
-    // Animate the marker floating up and down
+    
     this.tweens.add({ 
         targets: this.npcMarker, 
         y: this.npc.y - 60, 
@@ -988,31 +985,31 @@ this.npcMarker = this.add.text(this.npc.x, this.npc.y - 50, '!', {
         repeat: -1 
     });
 
-    // 2. Spawn the Story Gate
-    // EXACT location you asked for:
+    
+    
     this.storyGate = this.physics.add.sprite(865, 1255, 'scifi_gate_closed');
     this.storyGate.setScale(4).setImmovable(true).setDepth(19);
     
-    // Important: Tweaking the hitbox so the gate feels solid
+    
     this.storyGate.body.setSize(this.storyGate.width, this.storyGate.height);
     this.physics.add.collider(this.player, this.storyGate);
 
-    let revealZone = this.add.zone(848, 427, 400, 50); // Width 400 covers the hallway
+    let revealZone = this.add.zone(848, 427, 400, 50); 
 this.physics.add.existing(revealZone);
 
 this.physics.add.overlap(this.player, revealZone, () => {
-    // Only trigger if we haven't done the reveal yet
+    
     if (!this.evilRevealPlayed) {
         this.triggerEvilReveal();
-        revealZone.destroy(); // Remove trigger so it doesn't happen twice
+        revealZone.destroy(); 
     }
 });
 }
 
-// --- PROFESSOR ANIMATIONS ---
+
 if (!this.anims.exists('prof-run-up')) {
     
-    // 1. Walk Up (Frames 36, 37, 38 are the Up row for the white suit guy)
+    
     this.anims.create({
         key: 'prof-run-up',
         frames: this.anims.generateFrameNumbers('professor_new', { frames: [52, 53, 54, 55, 56, 57] }), 
@@ -1020,61 +1017,61 @@ if (!this.anims.exists('prof-run-up')) {
         repeat: -1
     });
 
-    // 2. Idle Up (Standing facing the door)
+    
     this.anims.create({
         key: 'prof-idle-up',
         frames: [ { key: 'professor_new', frame: 1 } ], 
         frameRate: 20
     });
 
-    // 3. Idle Down (Turning back to look at you)
+    
     this.anims.create({
         key: 'prof-idle-down',
         frames: [ { key: 'professor_new', frame: 3 } ], 
         frameRate: 20
     });
 }
-        // --- INIT MOBILE CONTROLS ---
+        
         this.mobileControls = new MobileControls(this);
 
         if (this.currentLevelData.level === 26) {
-    // 1. Manually place player in the boss arena (Safe spot)
+    
     this.player.setPosition(843, 590); 
     
-    // 2. Spawn the Professor nearby (Visual only)
+    
     this.npc = this.physics.add.sprite(845, 120, 'professor_new');
     this.npc.setScale(3).play('prof-idle-down');
 
-    // 3. Start the Boss Mechanics immediately
+    
     this.startLevel26Gameplay();
 }
 
         if (!this.anims.exists('laser-anim')) {
     this.anims.create({
         key: 'laser-anim',
-        // Frames 0, 1, 2, 3, 4 (Since your image has 5 parts)
+        
         frames: this.anims.generateFrameNumbers('laser', { start: 0, end: 4 }), 
-        frameRate: 15, // Speed of flickering
-        repeat: -1     // Loop forever
+        frameRate: 15, 
+        repeat: -1     
     });
 }
 
-       // --- MOVING CARTS (OBSTACLES) ---
-// 1. Create the Group
+       
+
 this.carts = this.physics.add.group({
     allowGravity: false,
     immovable: true
 });
 
-// 2. Find Objects (Check both names to be safe)
+
 const cartObjs = map.getObjectLayer('MovingCart')?.objects || map.getObjectLayer('MovingCart')?.objects || [];
 
 cartObjs.forEach(obj => {
-    // Create the sprite
+    
     let cart = this.carts.create(obj.x * 3, obj.y * 3, 'MovingCart');
     cart.setScale(3).setOrigin(0, 0);
     
-    // Make the hitbox slightly smaller so it's not unfair
+    
     cart.body.setSize(cart.width * 0.8, cart.height * 0.8);
     cart.body.setOffset(cart.width * 0.1, cart.height * 0.1);
     cart.mySound = this.sound.add('cart_loop', { 
@@ -1082,16 +1079,16 @@ cartObjs.forEach(obj => {
         volume: 0 
     });
 
-    // Get movement values
+    
     const moveX = obj.properties?.find(p => p.name === 'moveX')?.value || 0;
     const moveY = obj.properties?.find(p => p.name === 'moveY')?.value || 0;
 
-    // Calculate Speed (100px per second)
+    
     const pixelsPerSecond = 600; 
     const dist = Math.sqrt((moveX * 3) ** 2 + (moveY * 3) ** 2);
     const calculatedDuration = (dist > 0) ? (dist / pixelsPerSecond) * 1000 : 1000;
 
-    // 3. Move the Cart (Visual Only)
+    
     this.tweens.add({
         targets: cart,
         x: cart.x + (moveX * 3),
@@ -1101,45 +1098,65 @@ cartObjs.forEach(obj => {
         repeat: -1,
         ease: 'Sine.easeInOut',
         hold: 0
-        // removed onUpdate "ride" logic
+        
     });
-    // --- NEW OBSTACLE: ARROWS ---
+});
+
+
+this.physics.add.overlap(this.player, this.carts, () => {
+    
+    this.sound.play('gameover_sfx'); 
+    
+    
+    let respawnX = this.isCorrectionRoom ? 400 : this.currentLevelData.playerStart.x;
+    let respawnY = this.isCorrectionRoom ? 300 : this.currentLevelData.playerStart.y;
+    
+    this.player.setPosition(respawnX, respawnY);
+    
+    
+    this.cameras.main.shake(200, 0.01);
+});
+    
 this.arrows = this.physics.add.group({
     allowGravity: false,
     immovable: true
 });
 
-// Check for "Arrow" or "Arrows" layer name
+
 const arrowObjs = map.getObjectLayer('Arrow')?.objects || map.getObjectLayer('Arrows')?.objects || [];
 arrowObjs.forEach(obj => {
-    // 1. Create the Arrow
+    
     let arrow = this.arrows.create(obj.x * 3, obj.y * 3, 'arrow');
-    arrow.setScale(3).setOrigin(0.5, 0.5); // Center origin is better for rotation
+    arrow.setScale(3).setOrigin(0.5, 0.5); 
 
-    // 2. Get Movement Values
+    
     const moveX = obj.properties?.find(p => p.name === 'moveX')?.value || 0;
     const moveY = obj.properties?.find(p => p.name === 'moveY')?.value || 0;
+    arrow.mySound = this.sound.add('arrow_loop', { 
+        loop: true, 
+        volume: 0 
+    }); 
 
-    // 3. AUTOMATIC ROTATION 🔄
-    // This calculates the angle so the arrow always points towards its destination
+    
+    
     const angle = Phaser.Math.RadToDeg(Math.atan2(moveY, moveX));
 arrow.setAngle(angle + 90);
 
-    // 4. Adjust Hitbox based on Rotation
-    // If the arrow is vertical (90 or -90 degrees), we need to swap width/height 
-    // so the hitbox matches the new shape.
+    
+    
+    
     if (Math.abs(angle) === -90) {
-        arrow.body.setSize(10, 30); // Thin width, Tall height
+        arrow.body.setSize(10, 30); 
     } else {
-        arrow.body.setSize(30, 10); // Wide width, Short height
+        arrow.body.setSize(30, 10); 
     }
-    // Center the hitbox on the sprite
+    
     arrow.body.setOffset(
         (arrow.width - arrow.body.width) / 2, 
         (arrow.height - arrow.body.height) / 2
     );
 
-    // 5. Speed & Tween Logic
+    
     const pixelsPerSecond = 1000; 
     const dist = Math.sqrt((moveX * 3) ** 2 + (moveY * 3) ** 2);
     const calculatedDuration = (dist > 0) ? (dist / pixelsPerSecond) * 1000 : 1000;
@@ -1151,10 +1168,10 @@ const angleDeg = Phaser.Math.RadToDeg(angleRad);
 const forwardAngle = angleDeg + textureOffset;
 const returnAngle = angleDeg + textureOffset + 180;
 
-// 2. Set Initial Angle
+
 arrow.setAngle(forwardAngle);
 
-// 3. The Tween
+
 this.tweens.add({
     targets: arrow,
     x: arrow.x + (moveX * 3),
@@ -1165,19 +1182,19 @@ this.tweens.add({
     ease: 'Linear',
     hold: 200,
 
-    // FORCE the angle when it turns around
+    
     onYoyo: () => {
         arrow.setAngle(returnAngle);
     },
     
-    // FORCE the angle when it starts over
+    
     onRepeat: () => {
         arrow.setAngle(forwardAngle);
     }
 });
 });
 
-// 7. Collision (Death)
+
 this.physics.add.overlap(this.player, this.arrows, () => {
     this.sound.play('gameover_sfx'); 
     let respawnX = this.isCorrectionRoom ? 400 : this.currentLevelData.playerStart.x;
@@ -1185,47 +1202,32 @@ this.physics.add.overlap(this.player, this.arrows, () => {
     this.player.setPosition(respawnX, respawnY);
     this.cameras.main.shake(200, 0.01);
 });
-});
 
-// 4. THE KILL SWITCH
-// If player touches a cart -> Respawn
-this.physics.add.overlap(this.player, this.carts, () => {
-    // A. Play sound
-    this.sound.play('gameover_sfx'); 
-    
-    // B. Respawn Player at start (Instant)
-    let respawnX = this.isCorrectionRoom ? 400 : this.currentLevelData.playerStart.x;
-    let respawnY = this.isCorrectionRoom ? 300 : this.currentLevelData.playerStart.y;
-    
-    this.player.setPosition(respawnX, respawnY);
-    
-    // C. (Optional) Camera shake for impact
-    this.cameras.main.shake(200, 0.01);
-});
 
-// --- NEW OBSTACLE: FIREBALLS (Animated) ---
+
+
 this.fireballs = this.physics.add.group({
     allowGravity: false,
     immovable: true
 });
 
-// Check for "Fireball" or "Fireballs" layer
+
 const fireObjs = map.getObjectLayer('Fireball')?.objects || map.getObjectLayer('Fireballs')?.objects || [];
 
 fireObjs.forEach(obj => {
-    // 1. Create the Sprite (NOT image)
+    
     let fire = this.fireballs.create(obj.x * 3, obj.y * 3, 'fireball');
     fire.setScale(3).setOrigin(0.5, 0.5);
     
-    // 2. PLAY ANIMATION
+    
     fire.play('fire-anim');
 
-    // 3. Movement Logic (Same as Arrow)
+    
     const moveX = obj.properties?.find(p => p.name === 'moveX')?.value || 0;
     const moveY = obj.properties?.find(p => p.name === 'moveY')?.value || 0;
 
-    // 4. Calculate Angle
-    // Fire sprites usually point UP. We add 90 degrees so the "top" of the fire points forward.
+    
+    
     const angle = Phaser.Math.RadToDeg(Math.atan2(moveY, moveX));
     fire.setAngle(angle + 90); 
     fire.mySound = this.sound.add('fire_loop', { 
@@ -1233,17 +1235,17 @@ fireObjs.forEach(obj => {
         volume: 0 
     });
 
-    // 5. Hitbox (Make it smaller/forgiving)
+    
     fire.body.setSize(10, 10);
-    fire.body.setCircle(5); // Circular hitbox is best for fireballs
+    fire.body.setCircle(5); 
     fire.body.setOffset(5, 8);
 
-    // 6. Speed & Tween
-    const pixelsPerSecond = 250; // Slightly slower than arrows?
+    
+    const pixelsPerSecond = 250; 
     const dist = Math.sqrt((moveX * 3) ** 2 + (moveY * 3) ** 2);
     const calculatedDuration = (dist > 0) ? (dist / pixelsPerSecond) * 1000 : 1000;
 
-    // Save start pos for looping
+    
     const startX = fire.x;
     const startY = fire.y;
 
@@ -1253,11 +1255,11 @@ fireObjs.forEach(obj => {
         y: fire.y + (moveY * 3),
         duration: calculatedDuration,
         repeat: -1,
-        yoyo: false, // Fireballs usually don't fly backward, they respawn
+        yoyo: false, 
         ease: 'Linear',
         hold: 200,
         
-        // Loop Logic: Teleport back to start
+        
         onRepeat: () => {
             fire.x = startX;
             fire.y = startY;
@@ -1265,7 +1267,7 @@ fireObjs.forEach(obj => {
     });
 });
 
-// 7. Collision (Death)
+
 this.physics.add.overlap(this.player, this.fireballs, () => {
     this.sound.play('gameover_sfx'); 
     let respawnX = this.isCorrectionRoom ? 400 : this.currentLevelData.playerStart.x;
@@ -1273,17 +1275,17 @@ this.physics.add.overlap(this.player, this.fireballs, () => {
     this.player.setPosition(respawnX, respawnY);
     this.cameras.main.shake(200, 0.01);
 });
-// --- NEW OBSTACLE: LASERS ---
+
 this.lasers = this.physics.add.group({
     allowGravity: false,
     immovable: true
 });
 
-// Look for a layer named "Laser" or "Lasers"
+
 const laserObjs = map.getObjectLayer('Laser')?.objects || map.getObjectLayer('Lasers')?.objects || [];
 
 laserObjs.forEach(obj => {
-    // 1. Create Sprite
+    
     let laser = this.lasers.create(obj.x * 3, obj.y * 3, 'laser');
     laser.setScale(7).setOrigin(0.5, 0.5);
     laser.play('laser-anim');
@@ -1291,40 +1293,40 @@ laserObjs.forEach(obj => {
 
     laser.mySound = this.sound.add('laser_loop', { 
         loop: true, 
-        volume: 0 // Start silent
+        volume: 0 
     });
 
-    // 2. Movement Properties
+    
     const moveX = obj.properties?.find(p => p.name === 'moveX')?.value || 0;
     const moveY = obj.properties?.find(p => p.name === 'moveY')?.value || 0;
     
-    // 3. Interval Properties (NEW) ⏱️
-    // Default is 0 (Always ON) if you don't set it in Tiled
+    
+    
     const interval = obj.properties?.find(p => p.name === 'interval')?.value || 0;
     const offset = obj.properties?.find(p => p.name === 'offset')?.value || 0;
     const customRotation = obj.properties?.find(p => p.name === 'rotation')?.value;
     const isHorizontal = (customRotation === 90) || (moveX === 0 && moveY !== 0);
 
-    // 4. Smart Rotation (Vertical vs Horizontal)
-   // 4. SMART HITBOXES (Adjusted based on screenshot)
+    
+   
     if (isHorizontal) {
-        // --- HORIZONTAL LASER ---
+        
         laser.setAngle(90); 
         
-        // Fair Hitbox: Width 24 (Length), Height 14 (Thickness)
+        
         laser.body.setSize(28, 28);
         laser.body.setOffset(4, 4); 
         
     } else {
-        // --- VERTICAL LASER ---
+        
         laser.setAngle(0);
 
-        // Fair Hitbox: Width 14 (Thickness), Height 24 (Length)
+        
         laser.body.setSize(28, 28);
         laser.body.setOffset(4, 4);
     }
     
-    // 5. MOVEMENT TWEEN
+    
     const pixelsPerSecond = 200; 
     const dist = Math.sqrt((moveX * 3) ** 2 + (moveY * 3) ** 2);
     const calculatedDuration = (dist > 0) ? (dist / pixelsPerSecond) * 1000 : 1000;
@@ -1342,20 +1344,20 @@ laserObjs.forEach(obj => {
         });
     }
 
-    // 6. THE BLINKING LOGIC (The Interval) 💡
+    
     if (interval > 0) {
-        // Start the timer loop
+        
         this.time.addEvent({
             delay: interval,
             loop: true,
-            startAt: offset, // Starts the cycle at different times if set
+            startAt: offset, 
             callback: () => {
-                // Toggle Visibility
+                
                 laser.setVisible(!laser.visible);
                 
-                // Toggle Deadly Hitbox
-                // If visible = Enable Body (Deadly)
-                // If hidden  = Disable Body (Safe)
+                
+                
+                
                 laser.body.enable = laser.visible;
             }
         });
@@ -1369,24 +1371,6 @@ laserObjs.forEach(obj => {
     this.cameras.main.shake(200, 0.01);
 });
 });
-this.input.keyboard.on('keydown-T', () => {
-    console.log("DEBUG: Teleporting to Finale...");
-    
-    // 1. Clear any old detention flags so the game doesn't get confused
-    localStorage.setItem('isInDetention', 'false');
-    localStorage.removeItem('detentionReturnLevel');
-
-    // 2. Find Level 25 Data
-    const level25Data = levels.find(l => l.level === 25);
-    
-    // 3. Launch it immediately
-    this.scene.start('GameLevel', { 
-        ...level25Data, 
-        isCorrectionRoom: false 
-    });
-});
-
-
         
     }
 
@@ -1434,8 +1418,8 @@ this.input.keyboard.on('keydown-T', () => {
         });
 
         this.darknessOverlay = this.add.image(this.player.x, this.player.y, 'vignette')
-    .setDepth(999) // On top of everything (UI is 1000+)
-    .setAlpha(0);  // Start invisible
+    .setDepth(999) 
+    .setAlpha(0);  
     }
 
     setupUI() {
@@ -1559,19 +1543,19 @@ qContainer.add(this.missionLabel);
     }
 
     handleInteraction() {
-    // 1. SAFETY CHECK: Is there an NPC?
+    
     if (this.npc && !this.isCorrectionRoom) {
         
-        // 2. CALCULATE DISTANCE (This was missing!)
+        
         const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, this.npc.x, this.npc.y);
         
-        // 3. CHECK DISTANCE
+        
         if (dist < 80) {
-            // --- LEVEL 1 DIALOGUE ---
+            
             if (this.currentLevelData.level === 1) {
                 this.showDialogue("PROF. PRIME:\n----------------\nHurry! Use Arrow Keys to move.\nPush the correct Answer Gem into the Platform!");
             } 
-            // --- LEVEL 25 DIALOGUE ---
+            
             else if (this.currentLevelData.level === 25) {
                 if (this.storyGate && this.storyGate.texture.key === 'scifi_gate_closed') {
                     this.showDialogue("PROF. PRIME:\n----------------\nI'm hacking the mainframe...\nThe firewall is tough!\nSolve the equation to override the lock!");
@@ -1582,31 +1566,26 @@ qContainer.add(this.missionLabel);
 }
 
     update(time, delta) {
+
+        if (!this.sys.settings.active) return;
         if (this.isGameFinished || this.isLevelComplete) return; 
 
         if (this.isCutscenePlaying) {
         this.player.setVelocity(0, 0);
-        this.player.anims.play('idle-down', true); // Force stand still
+        this.player.anims.play('idle-down', true); 
         if (this.npcMarker) this.npcMarker.destroy();
-        return; // Stop processing controls
+        return; 
     }
 
-        // --- INTERACTION ---
+        
         if (Phaser.Input.Keyboard.JustDown(this.keyE)) { this.handleInteraction(); }
         
-        if (Phaser.Input.Keyboard.JustDown(this.keyN)) { this.handleWin(); }
-        if (Phaser.Input.Keyboard.JustDown(this.keyD)) { 
-            this.debugEnabled = !this.debugEnabled;
-            if (!this.debugEnabled && this.debugText) {
-                this.debugText.destroy();
-                this.debugText = null;
-            }
-        }
+    
 
         this.player.setVelocity(0);
         let moving = false;
         
-        // --- MOVEMENT LOGIC (KEYBOARD OR MOBILE) ---
+        
         const left = this.cursors.left.isDown || (this.mobileControls && this.mobileControls.left);
         const right = this.cursors.right.isDown || (this.mobileControls && this.mobileControls.right);
         const up = this.cursors.up.isDown || (this.mobileControls && this.mobileControls.up);
@@ -1640,39 +1619,76 @@ qContainer.add(this.missionLabel);
             
             if (!block.isLocked) {
                 this.answerSlots.forEach((plate) => {
-                    if (Phaser.Math.Distance.Between(block.x, block.y, plate.x, plate.y) < 25) {
-                        
-                        let requiredVal = this.isMultiSlot ? plate.requiredValue : this.correctAnswer;
-                        
-                        if (block.value == requiredVal) {
-                            block.x = plate.x;
-                            block.y = plate.y;
-                            block.body.setVelocity(0,0);
-                            block.isLocked = true;
-                            block.body.enable = false; 
-                            
-                            this.sound.play('snap_sfx'); 
+            if (Phaser.Math.Distance.Between(block.x, block.y, plate.x, plate.y) < 25) {
+                
+                let requiredVal = this.isMultiSlot ? plate.requiredValue : this.correctAnswer;
+                
+                if (block.value == requiredVal) {
+                    
+                    block.x = plate.x;
+                    block.y = plate.y;
+                    block.body.setVelocity(0,0);
+                    block.isLocked = true;
+                    block.body.enable = false; 
+                    
+                    this.sound.play('snap_sfx'); 
 
-                            if (plate.texture.key === 'floor_items') {
-                                plate.setFrame(31); 
-                            }
-                            
-                            if (this.isMultiSlot) {
-                                let correctLockedCount = this.blocks.getChildren().filter(b => b.isLocked).length;
-                                if (correctLockedCount === this.answerSlots.length) {
-                                    this.activatePortal();
-                                }
-                            } else {
-                                this.activatePortal();
-                                if (block.myText) block.myText.destroy();
-                                block.destroy(); 
-                            }
-                            
-                        } else {
-                            this.handleGameOver();
+                    if (plate.texture.key === 'floor_items') {
+                        plate.setFrame(31); 
+                    }
+                    
+                    if (this.isMultiSlot) {
+                        let correctLockedCount = this.blocks.getChildren().filter(b => b.isLocked).length;
+                        if (correctLockedCount === this.answerSlots.length) {
+                            this.activatePortal();
+                        }
+                    } else {
+                        this.activatePortal();
+                        if (block.myText) block.myText.destroy();
+                        block.destroy(); 
+                    }
+                    
+                } else {
+                    
+                    
+                    
+                    let isForgivable = false;
+
+                    if (this.isMultiSlot) {
+                        
+                        const lockedCount = this.blocks.getChildren().filter(b => b.isLocked).length;
+                        const totalSlots = this.answerSlots.length;
+
+                        
+                        
+                        if (lockedCount === totalSlots - 1) {
+                            isForgivable = true;
                         }
                     }
-                });
+
+                    if (isForgivable) {
+                        
+                        
+                        this.sound.play('gameover_sfx', { volume: 0.3, rate: 1.5 }); 
+                        
+                        block.setTint(0xff0000);
+                        this.time.delayedCall(300, () => block.clearTint());
+
+                        
+                        const angle = Phaser.Math.Angle.Between(plate.x, plate.y, block.x, block.y);
+                        const bounceSpeed = 400;
+                        let vx = (block.x === plate.x) ? bounceSpeed : Math.cos(angle) * bounceSpeed;
+                        let vy = (block.y === plate.y) ? 0 : Math.sin(angle) * bounceSpeed;
+                        block.body.setVelocity(vx, vy);
+
+                    } else {
+                        
+                        
+                        this.handleGameOver();
+                    }
+                }
+            }
+        });
             }
         });
 
@@ -1685,93 +1701,58 @@ qContainer.add(this.missionLabel);
         this.interactPrompt.setPosition(this.npc.x, this.npc.y - 50).setVisible(true);
         if (this.npcMarker) this.npcMarker.setVisible(false);
     } else {
-        // Hide Prompt
+        
         this.interactPrompt.setVisible(false);
         if (this.npcMarker) this.npcMarker.setVisible(true);
         this.hideDialogue();
     }
 }
 
-        // --- DEBUG TOGGLE ---
-        if (this.debugEnabled) {
-            // 1. DEFINE THE VARIABLES (This is what was missing!)
-            const mouseX = this.input.mousePointer.worldX;
-            const mouseY = this.input.mousePointer.worldY;
-            const playerX = this.player.x;
-            const playerY = this.player.y;
-            
-            // 2. Create Text Object if needed
-            if (!this.debugText) {
-                this.debugText = this.add.text(0, 0, '', { fontSize: '16px', fontFamily: 'monospace', fill: '#00ff00', backgroundColor: '#000000', padding: { x: 10, y: 10 } }).setOrigin(0).setScrollFactor(0).setDepth(500);
-            }
-
-            // 3. Update Text (Uses playerX, so it must be defined above!)
-            this.debugText.setText(`Player: (${Math.round(playerX)}, ${Math.round(playerY)})\nMouse: (${Math.round(mouseX)}, ${Math.round(mouseY)})`);
-            this.debugText.setPosition(10, 70);
-
-            // 4. Create/Show Hitboxes (The previous fix)
-            if (!this.physics.world.debugGraphic) {
-                this.physics.world.createDebugGraphic();
-            }
-            this.physics.world.debugGraphic.setVisible(true);
-
-        } else {
-            // 5. Hide everything when debug is OFF
-            if (this.physics.world.debugGraphic) {
-                this.physics.world.debugGraphic.setVisible(false);
-            }
-
-            if (this.debugText) {
-                this.debugText.destroy();
-                this.debugText = null;
-            }
-        }
 
         if (this.darknessOverlay) {
     this.darknessOverlay.x = this.player.x;
     this.darknessOverlay.y = this.player.y;
 
-    // --- PROXIMITY SOUND MANAGER ---
+    
 const updateSpatialSound = (group, maxDistance) => {
-    if (!group) return; // Safety check
-
-    group.children.each(obj => {
-        // Skip if this object doesn't have a sound attached
-        if (!obj.mySound) return;
-
-        // 1. Calculate Distance
-        const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, obj.x, obj.y);
-
-        // 2. Check Range
-        if (dist < maxDistance && obj.visible) {
-            
-            // Calculate Volume (Closer = Louder)
-            const volume = 1 - (dist / maxDistance);
-
-            // Start playing if it stopped (e.g., just blinked ON)
-            if (!obj.mySound.isPlaying) {
-                obj.mySound.play();
-            }
-            
-            // Adjust volume dynamically
-            obj.mySound.setVolume(volume);
         
-        } else {
-            // Silence the sound if:
-            // 1. Player is too far away OR
-            // 2. Laser blinked OFF (Invisible)
-            if (obj.mySound.isPlaying) {
-                obj.mySound.stop();
-            }
-        }
-    });
-};
+        if (!this.sys.settings.active || !group) return; 
 
-// --- RUN THE MANAGER FOR EACH GROUP ---
-// Adjust the numbers (300, 400) to change hearing range in pixels
-updateSpatialSound(this.lasers, 300);    // Lasers: Hear within 300px
-updateSpatialSound(this.carts, 400);     // Carts: Hear within 400px (Loud!)
-updateSpatialSound(this.fireballs, 250); // Fire: Hear within 250px
+        group.children.each(obj => {
+            
+            
+            
+            
+            if (!obj.mySound || !obj.mySound.manager) return;
+
+            const dist = Phaser.Math.Distance.Between(this.player.x, this.player.y, obj.x, obj.y);
+
+            
+            if (dist < maxDistance && obj.visible) {
+                const volume = 1 - (dist / maxDistance);
+                
+                
+                if (!obj.mySound.isPlaying) {
+                    obj.mySound.play();
+                }
+                
+                
+                obj.mySound.setVolume(volume);
+            
+            } else {
+                
+                if (obj.mySound.isPlaying) {
+                    obj.mySound.stop();
+                }
+            }
+        });
+    };
+
+    
+    updateSpatialSound(this.lasers, 300);
+    updateSpatialSound(this.carts, 400);     
+    updateSpatialSound(this.fireballs, 250); 
+    updateSpatialSound(this.arrows, 300);
 }
     }
 
@@ -1786,38 +1767,38 @@ updateSpatialSound(this.fireballs, 250); // Fire: Hear within 250px
    triggerGateCutscene() {
     if (this.cutscenePlayed) return;
     this.cutscenePlayed = true;
-    this.isCutscenePlaying = true; // Freeze Player
+    this.isCutscenePlaying = true; 
     this.player.setVelocity(0,0);
     this.player.anims.play('idle-down', true);
 
-    // 1. Camera Pans to Professor
+    
     this.cameras.main.stopFollow();
     this.cameras.main.pan(this.npc.x, this.npc.y, 800, 'Sine.easeInOut');
 
-    // 2. Professor walks UP to the Gate
+    
     this.time.delayedCall(1000, () => {
         
-        this.npc.play('prof-run-up'); // <--- FIXED: Uses Professor texture
+        this.npc.play('prof-run-up'); 
         
-        // Walk from 1300 -> 1295 (Short step)
+        
         this.tweens.add({
             targets: this.npc,
             y: this.storyGate.y + 40, 
             duration: 1000,
             onComplete: () => {
-                this.npc.play('prof-idle-up'); // <--- FIXED
+                this.npc.play('prof-idle-up'); 
                 this.showDialogue("PROF. PRIME:\nACCESS GRANTED!\nFOLLOW ME TO THE CORE!");
 
-                // 4. Gate Opens
+                
                 this.time.delayedCall(2000, () => {
                     this.hideDialogue();
                     this.sound.play('snap_sfx'); 
                     this.storyGate.setTexture('scifi_gate_open');
                     this.storyGate.body.enable = false;
 
-                    // 5. Run to Final Destination
+                    
                     this.time.delayedCall(500, () => {
-                        this.npc.play('prof-run-up'); // <--- FIXED
+                        this.npc.play('prof-run-up'); 
 
                         this.tweens.add({
                             targets: this.npc,
@@ -1826,9 +1807,9 @@ updateSpatialSound(this.fireballs, 250); // Fire: Hear within 250px
                             duration: 3500,
                             ease: 'Linear',
                             onComplete: () => {
-                                this.npc.play('prof-idle-down'); // <--- FIXED
+                                this.npc.play('prof-idle-down'); 
                                 
-                                // Return Camera
+                                
                                 this.cameras.main.pan(this.player.x, this.player.y, 1000, 'Sine.easeInOut', false, (camera, progress) => {
                                     if (progress === 1) {
                                         this.cameras.main.startFollow(this.player);
@@ -1863,19 +1844,92 @@ triggerEvilReveal() {
         this.time.delayedCall(4000, () => {
             this.showDialogue("PROF. PRIME:\nI am the outlier.\nAnd you are just a remainder.\nGoodbye.");
             
-            // --- WAIT FOR DIALOGUE TO FINISH ---
+            
             this.time.delayedCall(3000, () => {
                 this.hideDialogue();
                 
-                // --- CAMERA RETURNS TO PLAYER ---
+                
                 this.cameras.main.pan(this.player.x, this.player.y, 800, 'Power2', false, (camera, progress) => {
                     if (progress === 1) {
                         this.cameras.main.startFollow(this.player);
                         this.isCutscenePlaying = false; 
                         
-                        // --- !!! TRIGGER THE NEW GAMEPLAY HERE !!! ---
+                        
                         this.startLevel26Gameplay(); 
                     }
+                });
+            });
+        });
+    });
+}
+
+triggerFinaleCutscene() {
+    this.isCutscenePlaying = true;
+    this.player.setVelocity(0, 0);
+    this.player.anims.play('idle-up', true);
+
+    
+    this.sound.stopByKey('boss_bgm'); 
+    this.sound.play('victory_sfx', { volume: 0.8 }); 
+
+    
+    if (this.darknessOverlay) {
+        this.tweens.killTweensOf(this.darknessOverlay); 
+        this.darknessOverlay.destroy(); 
+    }
+
+    
+    this.cameras.main.flash(1000, 255, 255, 255);
+    this.cameras.main.shake(500, 0.02);
+
+    
+    this.npc.setPosition(848, 200); 
+    this.npc.setAlpha(1);
+    this.npc.play('prof-idle-down');
+
+    
+    this.time.delayedCall(1500, () => {
+        this.showDialogue("PROF. PRIME:\nImpossible...\nThe Area under the curve... is exactly 8.");
+        
+        this.time.delayedCall(4000, () => {
+            this.showDialogue("PROF. PRIME:\nMy calculations were... flawed.\nYou have balanced the equation.");
+
+            
+            this.tweens.add({
+                targets: this.npc,
+                alpha: 0,
+                duration: 2000,
+                ease: 'Power2',
+                onComplete: () => {
+                    this.npc.destroy(); 
+                }
+            });
+
+            this.time.delayedCall(3000, () => {
+                this.showDialogue("SYSTEM:\nERROR CLEARED.\nLOGIC RESTORED.\nYOU MAY LEAVE.");
+
+                
+                this.portal.setVisible(true);
+                this.portal.play('portal-spin');
+                this.portal.setTintFill(0xffd700); 
+                this.time.delayedCall(3000, () => {
+                    this.hideDialogue();
+
+                    
+                    this.tweens.add({
+                        targets: this.player,
+                        y: this.portal.y,
+                        x: this.portal.x,
+                        duration: 1500,
+                        onComplete: () => {
+                            
+                            this.cameras.main.fade(1000, 255, 255, 255, false, (camera, progress) => {
+                                if (progress === 1) {
+                                    this.scene.start('GameWon');
+                                }
+                            });
+                        }
+                    });
                 });
             });
         });
@@ -1884,12 +1938,16 @@ triggerEvilReveal() {
     activatePortal() {
     if (this.portal.visible) return;
 
+    if (this.currentLevelData.level === 26) {
+            this.triggerFinaleCutscene();
+            return; 
+        }
     if (this.currentLevelData.level === 25) {
         this.triggerGateCutscene();
-        // We return here so we don't accidentally run the standard portal logic yet
-        // The portal will naturally appear/be accessible after the cutscene finishes
-        // or you can manually enable the exit portal inside the cutscene function.
-        // For now, let's just enable the portal silently so it's ready when player arrives:
+        
+        
+        
+        
         return; 
     }
     
@@ -1899,14 +1957,14 @@ triggerEvilReveal() {
 
     this.stoneGates.children.iterate((gate) => { 
         if (gate) { 
-            // --- NEW CHECK ---
+            
             if (gate.isSciFi) {
-                gate.setTexture('scifi_gate_open'); // Swap to Sci-Fi Open
+                gate.setTexture('scifi_gate_open'); 
             } else {
-                gate.setTexture('gate_open');       // Swap to Stone Open
+                gate.setTexture('gate_open');       
             }
             
-            // Disable collisions so you can walk through
+            
             gate.body.enable = false; 
         } 
     });
@@ -1920,6 +1978,13 @@ triggerEvilReveal() {
         this.physics.pause();
         this.player.anims.stop();
         this.player.body.setVelocity(0); 
+
+        ['fire_loop', 'cart_loop', 'laser_loop', 'arrow_loop'].forEach(key => {
+            this.sound.getAll(key).forEach(s => {
+                s.stop();
+                s.destroy();
+            });
+        });
         this.sound.play('victory_sfx');
         
         let msg = this.isCorrectionRoom ? "DETENTION PASSED!" : `LEVEL ${this.currentLevelData.level}\nCOMPLETE!`;
@@ -1933,13 +1998,13 @@ triggerEvilReveal() {
             this.time.delayedCall(600, () => {
                 if (this.isCorrectionRoom) {
     localStorage.setItem('isInDetention', 'false');
-    const returnLvl = this.returnToLevelNum; // Save this number before deleting
+    const returnLvl = this.returnToLevelNum; 
     localStorage.removeItem('detentionReturnLevel');
     
     const levelToRetry = levels.find(l => l.level === returnLvl);
 
     if (levelToRetry) {
-        // Add a special flag 'isBossRetry' if returning to level 26
+        
         this.scene.start('GameLevel', { 
             ...levelToRetry, 
             isCorrectionRoom: false,
@@ -1949,7 +2014,7 @@ triggerEvilReveal() {
         this.scene.start('MainMenu'); 
     }
 } else {
-                    if (this.currentLevelData.level === 25) {
+                    if (this.currentLevelData.level === 26) {
                         this.scene.start('GameWon');
                     } else {
                         let nextLevelNum;
@@ -1974,6 +2039,13 @@ triggerEvilReveal() {
         this.physics.pause();
         this.player.anims.stop();
         this.sound.play('gameover_sfx');
+
+        ['fire_loop', 'cart_loop', 'laser_loop', 'arrow_loop'].forEach(key => {
+            this.sound.getAll(key).forEach(s => {
+                s.stop();
+                s.destroy();
+            });
+        });
 
         if (this.isCorrectionRoom) {
             this.add.text(400, 300, 'EXPELLED!\n(GAME OVER)', { fontSize: '64px', fill: '#f00', backgroundColor: '#000', fontFamily: 'Ithaca', align: 'center' }).setOrigin(0.5).setScrollFactor(0).setDepth(300);
@@ -2038,8 +2110,8 @@ triggerEvilReveal() {
     }
 
    startLevel26Gameplay() {
-    // 1. Update Internal Level Data
-    // We manually overwrite the data to match the PDF question exactly
+    
+    
     const level26Data = {
         level: 26,
         question: "Integration: Area under y=x from 0 to 4", 
@@ -2050,7 +2122,7 @@ triggerEvilReveal() {
 
     localStorage.setItem('lastPlayedLevel', 26);
 
-    // 2. Update the UI Text
+    
     if (this.missionLabel) {
         this.missionLabel.setText(`FINAL BOSS: ${level26Data.question}`);
         this.missionLabel.setColor('#ff0000'); 
@@ -2064,7 +2136,7 @@ triggerEvilReveal() {
         });
     }
 
-    // --- 3. CLEANUP ---
+    
     this.blocks.children.each(block => {
         if (block.myText) block.myText.destroy();
     });
@@ -2083,10 +2155,10 @@ triggerEvilReveal() {
         this.answerSlots = [];
     }
 
-    // --- 4. SPAWN NEW CONTENT ---
+    
 
-    // A. Spawn ONE Central Slot for the Final Answer "8"
-    // Placing it in the middle forces the player to brave the center of the arena
+    
+    
     const slotX = 848; 
     const slotY = 300;
     
@@ -2094,7 +2166,7 @@ triggerEvilReveal() {
     plate.play('lab-portal-idle');
     plate.setScale(3).setImmovable(true).setDepth(5);
     plate.body.setSize(12, 12).setOffset(2, 2);
-    plate.requiredValue = "8"; // <--- THE CORRECT ANSWER
+    plate.requiredValue = "8"; 
 
     let label = this.add.text(slotX, slotY - 40, "FINAL ANSWER", { 
         fontSize: '16px', fontFamily: 'Ithaca', fill: '#ffff00', stroke: '#000', strokeThickness: 3 
@@ -2104,13 +2176,13 @@ triggerEvilReveal() {
     plate.myLabel = label; 
     this.answerSlots.push(plate);
 
-    // B. Spawn Blocks (Must include "8")
+    
     const newBlocks = [
-        { x: 750, y: 400, val: "8" },   // <--- CORRECT ORB
-        { x: 950, y: 400, val: "4" },   // Distraction (Base)
-        { x: 848, y: 500, val: "16" },  // Distraction (If they forget to divide by 2)
-        { x: 700, y: 350, val: "x" },   // Distraction (Variable)
-        { x: 1000, y: 350, val: "0" }   // Distraction (Lower bound)
+        { x: 1577, y: 647, val: "8" },   
+        { x: 1547, y: 183, val: "4" },   
+        { x: 1467, y: 1070, val: "16" },  
+        { x: 140, y: 657, val: "x" },   
+        { x: 237, y: 1073, val: "0" }   
     ];
 
     newBlocks.forEach(blockData => {
@@ -2129,42 +2201,42 @@ triggerEvilReveal() {
         block.updateText = function() { text.x = this.x; text.y = this.y; };
     });
 
-    // 5. Start the Darkness Mechanic
+    
     this.startLightsOutMechanic();
 }
 
 startLightsOutMechanic() {
-    // 1. Initial "Power Down" (Goes dark)
+    
     this.tweens.add({
         targets: this.darknessOverlay,
-        alpha: 0.95, // Very dark, only flashlight visible
+        alpha: 0.95, 
         duration: 2000,
         ease: 'Power2'
     });
 
-    // 2. The Random Flicker Loop
+    
     this.time.addEvent({
-        delay: 5000, // Every 5 seconds
+        delay: 5000, 
         loop: true,
         callback: () => {
-            // Randomly choose: Flicker or Pitch Black?
+            
             if (Math.random() > 0.5) {
-                // FLICKER (Strobe light effect)
+                
                 this.tweens.add({
                     targets: this.darknessOverlay,
-                    alpha: 0.2, // Bright
+                    alpha: 0.2, 
                     duration: 50,
                     yoyo: true,
-                    repeat: 5, // Blink 5 times
+                    repeat: 5, 
                     onComplete: () => {
-                        this.darknessOverlay.setAlpha(0.95); // Return to dark
+                        this.darknessOverlay.setAlpha(0.95); 
                     }
                 });
             } else {
-                // TOTAL BLACKOUT (0.5 seconds of pure darkness)
+                
                 this.tweens.add({
                     targets: this.darknessOverlay,
-                    alpha: 1, // Full black (player can't see anything)
+                    alpha: 1, 
                     duration: 100,
                     yoyo: true,
                     hold: 500
@@ -2180,13 +2252,15 @@ class GameWon extends Phaser.Scene {
     constructor() { super('GameWon'); }
 
     create() {
+        this.cameras.main.fadeIn(1000, 255, 255, 255);
         this.sound.play('victory_sfx'); 
 
-        this.add.text(400, 200, 'CONGRATULATIONS!', { fontSize: '48px', fill: '#ffff00', fontFamily: 'Ithaca' }).setOrigin(0.5);
-        this.add.text(400, 280, 'YOU HAVE MASTERED THE LABYRINTH!', { fontSize: '32px', fill: '#00ff00', fontFamily: 'Ithaca' }).setOrigin(0.5);
-        this.add.text(400, 380, 'All Demo Levels Complete!', { fontSize: '24px', fill: '#ffffff', fontFamily: 'Ithaca' }).setOrigin(0.5);
+        this.add.text(400, 150, 'EQUATION BALANCED', { fontSize: '56px', fill: '#00ff00', fontFamily: 'Ithaca', fontStyle: 'bold' }).setOrigin(0.5);
+        this.add.text(400, 250, 'The Professor has been corrected.', { fontSize: '28px', fill: '#ffffff', fontFamily: 'Ithaca' }).setOrigin(0.5);
         
-        let returnBtn = this.add.text(400, 480, 'RETURN TO MENU', { fontSize: '20px', fill: '#0ff', fontFamily: 'Ithaca' }).setOrigin(0.5).setInteractive();
+        this.add.text(400, 350, 'YOU ARE THE MASTER OF CALCULUS!', { fontSize: '32px', fill: '#ffff00', fontFamily: 'Ithaca' }).setOrigin(0.5);
+        
+        let returnBtn = this.add.text(400, 500, 'RETURN TO MAIN MENU', { fontSize: '24px', fill: '#0ff', fontFamily: 'Ithaca' }).setOrigin(0.5).setInteractive();
 
         returnBtn.on('pointerdown', () => {
             this.scene.start('MainMenu');
@@ -2196,7 +2270,7 @@ class GameWon extends Phaser.Scene {
 
 const config = {
     type: Phaser.AUTO,
-    // IMPORTANT: Attach the game to our custom container
+    
     parent: 'game-container',
     scale: {
         mode: Phaser.Scale.FIT,
